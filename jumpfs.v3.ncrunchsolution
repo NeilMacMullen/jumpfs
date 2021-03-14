@@ -1,0 +1,10 @@
+﻿<SolutionConfiguration>
+  <Settings>
+    <AllowParallelTestExecution>False</AllowParallelTestExecution>
+   
+    <HotSpotsLineExclusionList />
+    <InstrumentationMode>Legacy</InstrumentationMode>
+    <NCrunchCacheStoragePath>%LOCALAPPDATA%\NCrunchCache</NCrunchCacheStoragePath>
+    <SolutionConfigured>True</SolutionConfigured>
+  </Settings>
+</SolutionConfiguration>
