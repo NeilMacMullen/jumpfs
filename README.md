@@ -1,4 +1,10 @@
-# Overview
+
+![GitHub release (latest by SemVer including pre-releases)](https://img.shields.io/github/downloads-pre/NeilMacmullen/jumpfs/total)
+[![Coverage Status](https://coveralls.io/repos/github/NeilMacMullen/jumpfs/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/NeilMacMullen/jumpfs?branch=main) [![Join the chat at https://gitter.im/jumpfs/community](https://badges.gitter.im/jumpfs/community.svg)](https://gitter.im/jumpfs/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+## Give a Star! :star:
+
+If you like or are using this project please give it a star or leave some feedback in the [discussions](https://github.com/NeilMacMullen/jumpfs/discussions/categories/send-a-smile) section. A little feedback goes a long way - thanks!
 gomark is a simple cross-platform exe and collection of scripts that allow you quickly bookmark locations in your file system, jump between them, or reference them from script commands.
 
 For example:
