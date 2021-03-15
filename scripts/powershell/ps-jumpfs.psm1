@@ -7,7 +7,7 @@ function jpenv() {
 function go($p) {
     $path = (jumpfs.exe find -name $p) ;
     set-location $path;
-    write-host (Get-Location).Path
+    #write-host (Get-Location).Path
 }
 
 
@@ -25,9 +25,9 @@ function mark($p,$r,$l,$c) {
 
 function lst($p) { jumpfs.exe list -match $p }
 
-function edit($p) { 
- $path = (jumpfs.exe find -name $p) ;
- code --new-window -g $path
+function codego($p) { 
+ $path = (jumpfs.exe find -name $p -format "%p:%l:%c") ;
+ code --goto $path
 }
 
 

@@ -15,6 +15,8 @@ jumpfs is a simple cross-platform exe and collection of scripts that allow you q
 
 It's easiest to demonstration with picture..
 
+![jumpfs in action](img/jumpfs.gif)
+
 ..Term with WSL, PowerShell, DOS
 
 PS: mark pshome
