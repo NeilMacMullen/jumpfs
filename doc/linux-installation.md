@@ -2,15 +2,19 @@
 
 Ensure you have dotnet 5.0 installed
 
-Assuming you are using Bash
+## Bash
 
-Edit your .profile in $env:ProfileDir to include these lines...
-
+Edit your .profile to include these lines...
+```
 #add path
-. /publish/jumpfs.sh
+TODO
+. /publish/bash-jumpfs.sh
+```
 
-*Optionally* 
-You may wish to change the function names
+### Faster startup
+
+When running under WSL, jumpfs needs to be told how to find the Windows APPLOCALDATA folder
+
 
 
 That's it!

@@ -53,9 +53,9 @@ If the bookmark supplied to **codego** is a file and has a line and column assoc
 
 Opens Windows File Explorer at the location of the bookmark (or the containing folder if the bookmark is a file).
 
-## Manually hacking bookmarks 
-Bookmarks are stored in a fairly self-explanatory JSON format.  The easiest way to find it is to just run 
-```jumpfs.exe env```
+### jumpfs_info - display version and other information
+**jumpfs_info** will provide version and environment information. 
+
 
 
 

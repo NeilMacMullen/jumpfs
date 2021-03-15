@@ -1,7 +1,7 @@
 
 
-function jpenv() {
-    write-host (jumpfs.exe env) ;
+function jumpfs_info() {
+    jumpfs.exe env 
 }
 
 function go($p) {
