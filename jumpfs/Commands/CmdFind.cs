@@ -1,4 +1,7 @@
-﻿using jumpfs.CommandLineParsing;
+﻿using System;
+using System.IO;
+using jumpfs.Bookmarking;
+using jumpfs.CommandLineParsing;
 
 namespace jumpfs.Commands
 {
@@ -9,11 +12,16 @@ namespace jumpfs.Commands
                 ArgumentDescriptor.Create<string>(Names.Name)
                     .Mandatory()
                     .WithHelpText("name of the bookmark"),
+                ArgumentDescriptor.CreateSwitch(Names.Win)
+                    .WithHelpText("use windows path"),
                 ArgumentDescriptor.Create<string>(Names.Format)
                     .WithHelpText(@"custom output format:
+  %f - (default) containing folder when this is a file
   %p - full path
   %l - line number 
   %c - column number
+  %N - newline
+  %D - Drive specifier (assuming windows path)
 
 specifiers can be combined and separated .  For example:
 
@@ -28,15 +36,26 @@ specifiers can be combined and separated .  For example:
             var name = results.ValueOf<string>(Names.Name);
             var format = results.ValueOf<string>(Names.Format);
             var mark = context.Repo.Find(name);
-            var path = context.ToNative(mark.Path);
+            var path = results.ValueOf<bool>(Names.Win)
+                ? context.ToWindows(mark.Path)
+                : context.ToNative(mark.Path);
+            var folder = (mark.Type == BookmarkType.File)
+                ? Path.GetDirectoryName(path)
+                : path;
+            var drive = path.Length > 0 ? path.Substring(0, 1) : string.Empty;
             if (format.Length == 0)
-                context.WriteLine(path);
+            {
+                context.WriteLine(folder);
+            }
             else
             {
                 format = format
-                        .Replace("%p", mark.Path)
+                        .Replace("%f", folder)
+                        .Replace("%p", path)
                         .Replace("%l", mark.Line.ToString())
                         .Replace("%c", mark.Column.ToString())
+                        .Replace("%N", Environment.NewLine)
+                        .Replace("%D", drive)
                     ;
                 context.WriteLine(format);
             }

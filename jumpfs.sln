@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jumpfs", "jumpfs\jumpfs.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PowerShell", "PowerShell", "{06C2B334-C4DB-4EE4-9E41-6B96BDD5EC64}"
 	ProjectSection(SolutionItems) = preProject
-		powershell\jumpfs-functions.psm1 = powershell\jumpfs-functions.psm1
+		scripts\powershell\ps-jumpfs.psm1 = scripts\powershell\ps-jumpfs.psm1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7E47A2B1-0B76-4D5E-A646-C38BC1405E07}"
@@ -20,10 +20,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bash", "bash", "{71679E9C-4289-45AB-83E2-45891796DB9C}"
 	ProjectSection(SolutionItems) = preProject
-		bash\jumpfs-setup.sh = bash\jumpfs-setup.sh
+		scripts\bash\bash-jumpfs.sh = scripts\bash\bash-jumpfs.sh
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cmd", "cmd", "{61E0D795-C342-4852-A92B-09D4452A36B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{AE4E31E8-F8F8-4918-B848-C8523941989B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{C3EA9AA4-7757-416A-858C-F85E64689852}"
+	ProjectSection(SolutionItems) = preProject
+		doc\cmd-installation.md = doc\cmd-installation.md
+		doc\jumpfs-exe.md = doc\jumpfs-exe.md
+		doc\linux-installation.md = doc\linux-installation.md
+		doc\powershell-installation.md = doc\powershell-installation.md
+		doc\troubleshooting.md = doc\troubleshooting.md
+		doc\wsl-installation.md = doc\wsl-installation.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +54,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{06C2B334-C4DB-4EE4-9E41-6B96BDD5EC64} = {AE4E31E8-F8F8-4918-B848-C8523941989B}
+		{71679E9C-4289-45AB-83E2-45891796DB9C} = {AE4E31E8-F8F8-4918-B848-C8523941989B}
+		{61E0D795-C342-4852-A92B-09D4452A36B5} = {AE4E31E8-F8F8-4918-B848-C8523941989B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CADCDD24-864F-420B-9E27-DD613740F461}

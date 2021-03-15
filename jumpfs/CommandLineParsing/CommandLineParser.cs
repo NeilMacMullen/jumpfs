@@ -68,7 +68,11 @@ Use of of the following:
                 else
                 {
                     if (arg.CanBeEmpty)
+                    {
                         assignedArguments[arg.Name] = arg.DefaultValueWhenFlagPresent();
+                        //rewind since we didn't actually consume
+                        i--;
+                    }
                     else
                         return ParseResults.Error(requestedCommand, $"Parameter '{arg.Name}' missing value");
                 }

@@ -23,16 +23,17 @@ namespace Tests
         [Test]
         public void BookMarkCanBeWritten()
         {
-            _repo.Mark("a", "a path");
+            _repo.Mark(BookmarkType.Folder, "a", "a path");
             var b = _repo.Find("a");
             b.Name.Should().Be("a");
+            b.Type.Should().Be(BookmarkType.Folder);
         }
 
         [Test]
         public void BookMarkCanBeChanged()
         {
-            _repo.Mark("home", @"path\1");
-            _repo.Mark("home", @"path\2");
+            _repo.Mark(BookmarkType.Folder, "home", @"path\1");
+            _repo.Mark(BookmarkType.Folder, "home", @"path\2");
 
             var b = _repo.Find("home");
             b.Name.Should().Be("home");

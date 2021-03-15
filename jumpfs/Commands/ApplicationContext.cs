@@ -26,6 +26,7 @@ namespace jumpfs.Commands
 
         public void WriteLine(string str) => OutputStream.WriteLine(str);
         public string ToNative(string path) => _pathConverter.ToShell(Repo.Environment.ShellType, path);
+        public string ToWindows(string path) => _pathConverter.ToShell(ShellType.PowerShell, path);
 
         public string ToAbsolutePath(string path)
         {

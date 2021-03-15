@@ -38,6 +38,9 @@ namespace jumpfs.Bookmarking
         {
             var all = Load();
             var matches = all.Where(m => m.Name.Contains(match) || m.Path.Contains(match)).ToArray();
+            //TODO - remove temporary fix for migration
+            foreach (var m in matches.Where(b => b.Type == BookmarkType.Unknown))
+                m.Type = BookmarkType.Folder;
             return matches;
         }
 
@@ -48,9 +51,9 @@ namespace jumpfs.Bookmarking
             Environment.WriteAllText(BookmarkFile, text);
         }
 
-        public void Mark(string name, string path) => Mark(name, path, 0, 0);
+        public void Mark(BookmarkType type, string name, string path) => Mark(type, name, path, 0, 0);
 
-        public void Mark(string name, string path, int line, int column)
+        public void Mark(BookmarkType type, string name, string path, int line, int column)
         {
             var marks = Load();
             var existing = marks.SingleOrDefault(m => m.Name == name);
@@ -60,6 +63,7 @@ namespace jumpfs.Bookmarking
                 marks = marks.Append(existing).ToArray();
             }
 
+            existing.Type = type;
             existing.Path = path;
             existing.Name = name;
             existing.Line = line;

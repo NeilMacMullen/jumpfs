@@ -9,8 +9,29 @@
 
 ## Give a Star! :star:
 
-If you like or are using this project please give it a star or leave some feedback in the [discussions](https://github.com/NeilMacMullen/jumpfs/discussions/categories/send-a-smile) section. A little feedback goes a long way - thanks!
-gomark is a simple cross-platform exe and collection of scripts that allow you quickly bookmark locations in your file system, jump between them, or reference them from script commands.
+If you like or are using this project please give it a star - thanks!
+
+jumpfs is a simple cross-platform exe and collection of scripts that allow you quickly bookmark locations in your file system, jump between them, or reference them from script commands.
+
+It's easiest to demonstration with picture..
+
+..Term with WSL, PowerShell, DOS
+
+PS: mark pshome
+DOS: go pshome
+WSL: go pshome
+WSL cd ~
+    mark wslhome
+DOS:lst ubu
+x wslhome
+PS mark  scr \jumpfs\publish\....psm 10 10
+WSL: codeat scr
+     go scr
+
+
+
+
+
 
 For example:
 
@@ -22,7 +43,7 @@ x appdata
 
 It's invaluable if you spend a lot of time in a command shell.
 
-The core is the gomark.exe executable.
+The core is the jumpfs.exe executable.
 
 Wrapper scripts are provided for...
 - Powershell
@@ -57,11 +78,11 @@ The Bookmarks file is stored as JSON at .....
 #Installation
 
 ##PowerShell
-Download the gomark executable and ensure it is in your path.
-Download the gomark-functions.psm1 module.  (Edit aliases to taste)
+Download the jumpfs executable and ensure it is in your path.
+Download the jumpfs-functions.psm1 module.  (Edit aliases to taste)
 Run 
  
- import-module gomark-functions.psm1 
+ import-module jumpfs-functions.psm1 
 
 ##DOS
 
@@ -69,7 +90,14 @@ Run
 
 sudo apt-get install dotnet-dev-1.0.1
 
+##Contributions
+Contributions are welcome.  Particularly to documentation and Linux-side scripts!  Please read the
+[contributors guide](doc/Contributions.md)
 
+Shell extension
+VS Code extension
+
+Bookmark format is open - easy to add your own editors or client apps
 
 
 

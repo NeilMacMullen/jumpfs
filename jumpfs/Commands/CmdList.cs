@@ -7,15 +7,15 @@ namespace jumpfs.Commands
         public static readonly CommandDescriptor Descriptor
             = new CommandDescriptor(Run, "list")
                 .WithArguments(
-                    ArgumentDescriptor.Create<string>(Names.Name)
-                        .WithHelpText("restrict the output to items where the name or path contains the supplied name")
+                    ArgumentDescriptor.Create<string>(Names.Match)
+                        .WithHelpText("restrict the output to items where the name or path matches the supplied string")
                         .AllowEmpty()
                 )
                 .WithHelpText("lists all or a subset of stored bookmarks");
 
         private static void Run(ParseResults results, ApplicationContext context)
         {
-            var name = results.ValueOf<string>(Names.Name);
+            var name = results.ValueOf<string>(Names.Match);
             var marks = context.Repo.List(name);
             foreach (var mark in marks)
             {

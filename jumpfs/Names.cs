@@ -1,5 +1,8 @@
 ﻿namespace jumpfs
 {
+    /// <summary>
+    ///     These are stored here to ensure some consistency between commands
+    /// </summary>
     public static class Names
     {
         public const string Name = "name";
@@ -10,5 +13,7 @@
         public const string Column = "column";
         public const string Format = "format";
         public const string Literal = "literal";
+        public const string Match = "match";
+        public static string Win = "winpath";
     }
 }

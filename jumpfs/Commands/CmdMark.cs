@@ -1,4 +1,5 @@
-﻿using jumpfs.CommandLineParsing;
+﻿using jumpfs.Bookmarking;
+using jumpfs.CommandLineParsing;
 
 namespace jumpfs.Commands
 {
@@ -9,10 +10,13 @@ namespace jumpfs.Commands
                 ArgumentDescriptor.Create<string>(Names.Name)
                     .WithHelpText("name of the bookmark"),
                 ArgumentDescriptor.Create<string>(Names.Path)
+                    .AllowEmpty()
                     .WithHelpText("file or folder name"),
                 ArgumentDescriptor.Create<int>(Names.Line)
+                    .AllowEmpty()
                     .WithHelpText("line number"),
                 ArgumentDescriptor.Create<int>(Names.Column)
+                    .AllowEmpty()
                     .WithHelpText("column number"),
                 ArgumentDescriptor.CreateSwitch(Names.Literal)
                     .WithHelpText("use the path as provided rather than trying to turn it into an absolute path")
@@ -28,8 +32,8 @@ namespace jumpfs.Commands
 
             if (!results.ValueOf<bool>(Names.Literal))
                 path = context.ToAbsolutePath(path);
-
-            context.Repo.Mark(name, path, line, column);
+            var type = context.Repo.Environment.FileExists(path) ? BookmarkType.File : BookmarkType.Folder;
+            context.Repo.Mark(type, name, path, line, column);
         }
     }
 }

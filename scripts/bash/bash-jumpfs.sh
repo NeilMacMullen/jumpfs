@@ -19,29 +19,32 @@ go() {
     cd $d
 }
 
-#functions feel free to change the names of these to suit....
+
 codego() {
     d=`$JumpFsExe find -name $1 -format %p:%l:%c`
     `code --goto "$d"`
 }
 
 mark() {
-    if [[ -z "$2" ]]
-    then
-      d=`pwd`
-      echo "current dir $d"
-      `$JumpFsExe mark -name $1 -path $d`
-    else
-       echo "calling with $1/$2"
-      `$JumpFsExe mark -name $1 -path $2`
-    fi
-    
+      `$JumpFsExe mark -name $1 -path $2 -line $3 -column $4`
 }
 
 lst() {
-    matches=`$JumpFsExe list -name $1`
+    matches=`$JumpFsExe list -match $1`
     echo "$matches"
 }
+
+bmk() {
+   d=`$JumpFsExe find -name $1 -format %p`
+   echo "$d"
+}
+
+
+x() {
+   d=`$JumpFsExe find -name $1 -winpath`
+   explorer.exe "$d"
+}
+
 
 
 jpenv() {

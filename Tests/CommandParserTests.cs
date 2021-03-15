@@ -157,5 +157,23 @@ namespace Tests
             var results = parser.Parse("test".Tokenise());
             results.IsSuccess.Should().BeFalse();
         }
+
+        [Test]
+        public void OptionalValuesDontElideSuccessiveTokens()
+        {
+            var command = new CommandDescriptor(Noop, "test")
+                .WithArguments(
+                    ArgumentDescriptor.Create<string>("foo")
+                        .AllowEmpty(),
+                    ArgumentDescriptor.Create<string>("bar")
+                        .AllowEmpty()
+                );
+
+            var parser = new CommandLineParser(command);
+            var results = parser.Parse("test -foo -bar xyz".Tokenise());
+            results.IsSuccess.Should().BeTrue();
+            results.ValueOf<string>("foo").Should().Be(string.Empty);
+            results.ValueOf<string>("bar").Should().Be("xyz");
+        }
     }
 }

@@ -19,8 +19,8 @@ namespace jumpfs.Commands
         /// </remarks>
         public string ToAbsolute(string path)
         {
-            if (path.Length == 0) return path;
             var root = Env.Cwd();
+            if (path.Length == 0) return root;
             //Path.GetFullPath does different things under unix and windows
             //so we need to do some run-time adjustment!
             if (ShellGuesser.IsUnixy())
