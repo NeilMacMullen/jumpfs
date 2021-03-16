@@ -2,7 +2,7 @@
 
 # jumpfs info
 function jumpfs_info() {
-    jumpfs.exe env 
+    jumpfs.exe info 
 }
 
 # create a bookmark 
