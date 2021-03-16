@@ -2,8 +2,6 @@
 {
     public static class GitVersionInformation
     {
-        public const string SemVer = "0.0.0";
-        public const string CommitDate = "unknown";
-        public const string ShortSha = "unknown";
+        public const string SemVer = "1.0.0";
     }
 }

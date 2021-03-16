@@ -1,7 +1,8 @@
 {
   "profiles": {
-    "gomark": {
-      "commandName": "Project"
+    "info": {
+      "commandName": "Project",
+      "commandLineArgs": "info"
     }
   }
 }
