@@ -13,7 +13,7 @@ namespace Tests
         {
         }
 
-        private readonly string Unc = @"\\wsl$Ubuntu\";
+        private readonly string _unc = @"\\wsl$Ubuntu\";
 
         [Test]
         public void RootedPath()
@@ -27,24 +27,24 @@ namespace Tests
         [Test]
         public void InternalWslPath()
         {
-            var p = new PathConverter(Unc);
+            var p = new PathConverter(_unc);
             var src = @"/var/etc";
             p.ToShell(ShellType.Wsl, src).Should().Be("/var/etc");
         }
 
         [Test]
-        public void InternalPSPath()
+        public void InternalPsPath()
         {
-            var p = new PathConverter(Unc);
+            var p = new PathConverter(_unc);
             var src = @"/var/etc";
-            p.ToShell(ShellType.PowerShell, src).Should().Be($@"{Unc}var\etc");
+            p.ToShell(ShellType.PowerShell, src).Should().Be($@"{_unc}var\etc");
         }
 
         [Test]
-        public void UNCPath()
+        public void UncPath()
         {
-            var p = new PathConverter(Unc);
-            var src = @$"{Unc}var\etc";
+            var p = new PathConverter(_unc);
+            var src = @$"{_unc}var\etc";
             p.ToShell(ShellType.Wsl, src).Should().Be("/var/etc");
             p.ToShell(ShellType.PowerShell, src).Should().Be(src);
         }

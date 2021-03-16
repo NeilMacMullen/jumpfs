@@ -21,6 +21,7 @@ namespace jumpfs
                 using var client = new HttpClient();
                 var raw = await client.GetStringAsync(ChangeList);
                 var infos = JsonSerializer.Deserialize<VersionInfo[]>(raw);
+                // ReSharper disable once AssignNullToNotNullAttribute
                 return infos.OrderByDescending(i => i.Date).First();
             }
             catch

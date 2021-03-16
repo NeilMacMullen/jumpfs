@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Runtime.InteropServices;
-using jumpfs.Bookmarking;
+﻿using System.IO;
 
 namespace jumpfs.EnvironmentAccess
 {
@@ -27,16 +24,5 @@ namespace jumpfs.EnvironmentAccess
             System.Environment.GetFolderPath(folderName);
 
         public string Cwd() => Directory.GetCurrentDirectory();
-
-        private ShellType GuessShell()
-        {
-            //if the user has not specified the shell, try to guess it from environmental information
-            var forcedEnv = GetEnvironmentVariable(EnvVariables.ShellOveride);
-            return Enum.TryParse(typeof(ShellType), forcedEnv, true, out var shell)
-                ? (ShellType) shell
-                : RuntimeInformation.OSDescription.Contains("Linux")
-                    ? ShellType.Wsl
-                    : ShellType.PowerShell;
-        }
     }
 }

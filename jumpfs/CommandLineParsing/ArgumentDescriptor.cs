@@ -69,7 +69,6 @@ namespace jumpfs.CommandLineParsing
                 return true;
             }
 
-            ;
             if (Type == typeof(int))
             {
                 if (int.TryParse(valStr, out var i))

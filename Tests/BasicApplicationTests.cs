@@ -18,17 +18,17 @@ namespace Tests
         {
             _stdout = new StringWriter();
             _stderr = new StringWriter();
-            env = new MockEnvironment(ShellType.PowerShell, new MockFileSystem());
+            _env = new MockEnvironment(ShellType.PowerShell, new MockFileSystem());
             if (ShellGuesser.IsUnixy())
             {
-                env.SetCwd(@"/usr");
+                _env.SetCwd(@"/usr");
             }
             else
             {
-                env.SetCwd(@"D:\");
+                _env.SetCwd(@"D:\");
             }
 
-            _repo = new BookmarkRepository(env);
+            _repo = new BookmarkRepository(_env);
             _context = new ApplicationContext(_repo, _stdout, _stderr);
         }
 
@@ -37,7 +37,7 @@ namespace Tests
         private StringWriter _stderr;
 
         private StringWriter _stdout;
-        private MockEnvironment env;
+        private MockEnvironment _env;
 
         private void Execute(string cmd)
         {
