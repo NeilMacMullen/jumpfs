@@ -10,7 +10,7 @@ Run the **build.ps** script in the top *jumps* folder.
 
 ## Linux
 Run the **build.sh** script in the top *jumps* folder.
-* Note* that it is currently not possible to build the Windows executable from Linux.  If you use both PowerShell and Linux, you should build from PowerShell * 
+*Note that it is currently not possible to build the Windows executable from Linux.  If you use both PowerShell and Linux, you should build from PowerShell* 
 
 
 ## Artefacts
