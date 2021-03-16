@@ -19,47 +19,48 @@ export JUMPFS_FOLDER
 JUMPFS_WSL_ROOT="$(wslpath -w /)"
 export JUMPFS_WSL_ROOT
 
-#Feel free to change the names of these to suit....
+#Feel free to change the names of the scripts to suit you....
 
-
-mark() {
-      `$JumpFsExe mark --name $1 --path $2 --line $3 --column $4`
-}
-
-go() {
-    d=`$JumpFsExe find --name $1`
-    cd $d
-}
-
-
-lst() {
-    matches=`$JumpFsExe list --match $1`
-    echo "$matches"
-}
-
-
-
+# jumpfs info
 jumpfs_info() {
     info=`$JumpFsExe info`
     echo "$info"
 }
 
 
+# create a bookmark 
+mark() {
+      `$JumpFsExe mark --name $1 --path $2 --line $3 --column $4`
+}
+
+#go to a bookmark 
+go() {
+    d=`$JumpFsExe find --name $1`
+    cd $d
+}
+
+# list bookmarks
+lst() {
+    matches=`$JumpFsExe list --match $1`
+    echo "$matches"
+}
+
+#open VS Code at a bookmark
 codego() {
     d=`$JumpFsExe find --name $1 --format %p:%l:%c`
     `code --goto "$d"`
 }
 
-
-
-bmk() {
-   d=`$JumpFsExe find --name $1 --format %p`
-   echo "$d"
-}
-
-
+# open file-explorer at bookmark
 x() {
    d=`$JumpFsExe find --name $1 --winpath`
    explorer.exe "$d"
 }
+
+# get the path of a bookmark - useful for building command lines
+bp() {
+   d=`$JumpFsExe find --name $1 --format %p`
+   echo "$d"
+}
+
 

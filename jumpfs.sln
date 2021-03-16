@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bash", "bash", "{71679E9C-4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cmd", "cmd", "{61E0D795-C342-4852-A92B-09D4452A36B5}"
 	ProjectSection(SolutionItems) = preProject
+		codego.bat = codego.bat
 		scripts\cmd\go.bat = scripts\cmd\go.bat
 		scripts\cmd\lst.bat = scripts\cmd\lst.bat
 		scripts\cmd\mark.bat = scripts\cmd\mark.bat

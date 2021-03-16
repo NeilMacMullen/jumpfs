@@ -49,12 +49,18 @@ The main commands are listed below but you can create your own quite easily by r
 If no arguments are supplied, **lst** will display all stored bookmarks.  If an argument is given, it is used to search within the bookmark names and paths and only those that match are returned.
 
 ### codego - open Visual Studio Code at the bookmark
-
 If the bookmark supplied to **codego** is a file and has a line and column associated with it the file will be opened at that position.
 
 ### x - open Windows File Explorer at the bookmark
-
 Opens Windows File Explorer at the location of the bookmark (or the containing folder if the bookmark is a file).
+
+### bp - get bookmark path
+Gets the path of a bookmark so you can use it in a command.  For example:
+```
+ls (bp myplace)
+```
+
+
 
 ### jumpfs_info - display version and other information
 **jumpfs_info** will provide version and environment information. 
