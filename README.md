@@ -4,16 +4,17 @@
 
 
 
-# EARLY ACCESS
+# !!! EARLY ACCESS !!!
 
-"Works for me" *TM* but I'd be keen to get feedback from others - particularly on the Linux side.  Raise an issue if you run into problems or drop me a line on Gitter.
+Current status is *"Works for me - TM"* but I'd be keen to get feedback from others - particularly on the Linux side.  Raise an issue if you run into problems or drop me a line on Gitter.
+<hr/>
 
 ## Give a Star! :star:
 
 If you like, or are using this project please give it a star - thanks!
 <hr/>
 
-**jumpfs** is a simple cross-platform exe and collection of scripts that allow you bookmark locations in your file system, jump between them, or reference them from commands.  If you spent much time at the command line you owe it to your TAB key to use this!
+**jumpfs** is a simple cross-platform exe and collection of scripts that allow you bookmark locations in your file system, jump between them, or open them in explorer or VS Code.  If you spent much time at the command line you owe it to your TAB key to use this!
 
 It's easiest to demonstrate with a picture..
 
