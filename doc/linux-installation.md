@@ -1,22 +1,12 @@
-# Installing for WSL
+# Installing for Linux
 
-Ensure you have dotnet 5.0 installed
+If you are installing for Linux runing on Windows, please follow the [WSL installation guide](wsl-installation.md)
 
-## Bash
+If you are truly installing on "native" Linux then most of the installation flow for WSL also applies.  The differences are:
 
-Edit your .profile to include these lines...
-```
-#add path
-TODO
-. /publish/bash-jumpfs.sh
-```
-
-### Faster startup
-
-When running under WSL, jumpfs needs to be told how to find the Windows APPLOCALDATA folder
+- you should obviously use a folder in the native filesystem to store the files!
+- at the beginning of the **bash-jumpfs.sh** script you should replace the calls to wslvar and wslpath with simple assignments. 
 
 
-
-That's it!
 
 

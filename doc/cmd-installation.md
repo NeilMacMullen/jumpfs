@@ -1,13 +1,17 @@
 # Installing for DOS/CMD
 
-Ensure you have dotnet 5.0 installed
+Ensure you have [.NET 5.0 for Windows](https://dotnet.microsoft.com/download/dotnet/5.0) installed.  You only need the *.NET Runtime* unless you are planning to [build from source](doc/buildFromSource.md).
 
-Functionality is a bit more limited under DOS but you can still use jumpfs to get around.
+Next, [download](doc/download.md) or [build](doc/buildFromSource.md) the tool and copy the files to a folder such as `C:\tools\jumpfs`.    
 
-Ensure dotnet is installed on your machine
+You'll need to ensure that the folder is on the PATH.  Add this to your autoexec.bat file or change it in system settings....
 
-Add to path...
-That's it!
+```
+@PATH=%PATH%;c:\tools\jumpfs
+```
+
+That's it!  Jumpfs should be available when you start your next CMD session.  You can confirm this by running `jumpfs_info`.
+
 
 
 

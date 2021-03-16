@@ -20,12 +20,13 @@ It's easiest to demonstrate with a picture..
 
 ## I want it! 
 
-Great! You can get prebuilt binaries from ... or build it yourself from source. 
+Great! You can get [prebuilt binaries](doc/download.md) or [build it yourself from source](doc/buildFromSource.md). 
 
 
 Follow the instructions to
 - [install for PowerShell](doc/powershell-installation.md)
-- [install for WSL or Linux](doc/linux-installation.md)
+- [install for WSL (Linux on Windows)](doc/wsl-installation.md)
+- [install for native Linux](doc/linux-installation.md)
 - [install for DOS/CMD](doc/cmd-installation.md)
 
 ## Basic use
@@ -56,17 +57,20 @@ Opens Windows File Explorer at the location of the bookmark (or the containing f
 ### jumpfs_info - display version and other information
 **jumpfs_info** will provide version and environment information. 
 
+## Advanced use and custom scripts
 
-
+See the [jumpfs parameter reference](doc/jumpfs-exe.md)
 
 
 ## Contributions
 PRs are welcome.  Particularly to documentation and Linux-side scripts!  Please read the
-[contributors guide](doc/Contributions.md)
+[contributors guide](doc/contributions.md)
 
-Shell extension
-VS Code extension
-Visual bookmark editor
+*Big-ticket* items it would be nice to get help with....
+
+- Windows Shell extension
+- VS Code extension
+- a visual bookmark editor (possible as a VS Code extension)
 
 
 
