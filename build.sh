@@ -1,7 +1,10 @@
 mkdir publish -p
 rm publish/* -rf
 dotnet publish -p:PublishProfile=linux
-dotnet publish -p:PublishProfile=windows
+echo ""
+echo "SORRY - windows exe can't be build under Linux"
+echo "Build from PowerShell if you want this"
+#dotnet publish -p:PublishProfile=windows
 
 rm publish/*.pdb
 
