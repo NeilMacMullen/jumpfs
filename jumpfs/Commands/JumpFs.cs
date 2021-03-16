@@ -11,10 +11,8 @@ namespace jumpfs.Commands
         {
             var parser = new CommandLineParser(
                 CmdShowArgs.Descriptor,
-                CmdInfo.Descriptor
-                ,
-                CmdMark.Descriptor
-                ,
+                CmdInfo.Descriptor,
+                CmdMark.Descriptor,
                 CmdFind.Descriptor,
                 CmdList.Descriptor,
                 CmdDebug.Descriptor

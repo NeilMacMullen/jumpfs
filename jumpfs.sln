@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{AE4E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{C3EA9AA4-7757-416A-858C-F85E64689852}"
 	ProjectSection(SolutionItems) = preProject
+		changelist.json = changelist.json
 		doc\cmd-installation.md = doc\cmd-installation.md
 		doc\jumpfs-exe.md = doc\jumpfs-exe.md
 		doc\linux-installation.md = doc\linux-installation.md
