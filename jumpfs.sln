@@ -28,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cmd", "cmd", "{61E0D795-C34
 		codego.bat = codego.bat
 		scripts\cmd\go.bat = scripts\cmd\go.bat
 		scripts\cmd\lst.bat = scripts\cmd\lst.bat
-		scripts\cmd\mark.bat = scripts\cmd\mark.bat
+		scripts\cmd\jumpfs_info.bat = scripts\cmd\jumpfs_info.bat
 		scripts\cmd\x.bat = scripts\cmd\x.bat
 	EndProjectSection
 EndProject
