@@ -57,32 +57,32 @@ namespace Tests
         [Test]
         public void SimpleBookmarking()
         {
-            Execute(_win, @"mark -name here -path C:/thepath -literal");
-            Execute(_wsl, "find -name here");
+            Execute(_win, @"mark --name here --path C:/thepath --literal");
+            Execute(_wsl, "find --name here");
             CheckOutput("/mnt/c/thepath");
         }
 
         [Test]
         public void Win2WslNameTranslation()
         {
-            Execute(_win, "mark -name here -path D:/a/b -literal");
-            Execute(_wsl, "find -name here");
+            Execute(_win, "mark --name here --path D:/a/b --literal");
+            Execute(_wsl, "find --name here");
             CheckOutput("/mnt/d/a/b");
         }
 
         [Test]
         public void WslToWinNameTranslation()
         {
-            Execute(_wsl, "mark -name here -path /mnt/d/a/b -literal");
-            Execute(_win, "find -name here");
+            Execute(_wsl, "mark --name here --path /mnt/d/a/b --literal");
+            Execute(_win, "find --name here");
             CheckOutput(@"d:\a\b");
         }
 
         [Test]
         public void WslToWinNameTranslation2()
         {
-            Execute(_wsl, @"mark -name here -path \\wsl$\Ubuntu\etc\x -literal");
-            Execute(_win, "find -name here");
+            Execute(_wsl, @"mark --name here --path \\wsl$\Ubuntu\etc\x --literal");
+            Execute(_win, "find --name here");
             CheckOutput(@"\\wsl$\Ubuntu\etc\x");
         }
 
@@ -91,8 +91,8 @@ namespace Tests
         {
             if (ShellGuesser.IsUnixy())
             {
-                Execute(_wsl, "mark -name here -path /etc/x");
-                Execute(_win, "find -name here");
+                Execute(_wsl, "mark --name here --path /etc/x");
+                Execute(_win, "find --name here");
                 CheckOutput(@"\\wsl$\Ubuntu\etc\x");
             }
         }

@@ -41,7 +41,7 @@ namespace Tests
                 );
 
             var parser = new CommandLineParser(command);
-            var results = parser.Parse("test -foo xyz".Tokenise());
+            var results = parser.Parse("test --foo xyz".Tokenise());
             results.IsSuccess.Should().BeTrue("because we recognised the command");
             results.CommandDescriptor.Name.Should().Be("test");
             results.ValueOf<string>("foo").Should().Be("xyz");
@@ -67,7 +67,7 @@ namespace Tests
                 .WithArguments(ArgumentDescriptor.Create<string>("foo"));
 
             var parser = new CommandLineParser(command);
-            var results = parser.Parse("test -fo xyz".Tokenise());
+            var results = parser.Parse("test --fo xyz".Tokenise());
             results.IsSuccess.Should().BeFalse();
         }
 
@@ -78,7 +78,7 @@ namespace Tests
                 .WithArguments(ArgumentDescriptor.Create<string>("foo"));
 
             var parser = new CommandLineParser(command);
-            var results = parser.Parse("test -foo ".Tokenise());
+            var results = parser.Parse("test --foo ".Tokenise());
             results.IsSuccess.Should().BeFalse();
         }
 
@@ -118,7 +118,7 @@ namespace Tests
                     ArgumentDescriptor.Create<int>("foo"));
 
             var parser = new CommandLineParser(command);
-            var results = parser.Parse("test -foo 123".Tokenise());
+            var results = parser.Parse("test --foo 123".Tokenise());
             results.IsSuccess.Should().BeTrue();
             results.ValueOf<int>("foo").Should().Be(123);
         }
@@ -138,7 +138,7 @@ namespace Tests
             results.IsSuccess.Should().BeTrue();
             results.ValueOf<bool>("foo").Should().Be(false);
 
-            var results2 = parser.Parse("test -foo".Tokenise());
+            var results2 = parser.Parse("test --foo".Tokenise());
             results2.IsSuccess.Should().BeTrue();
             results2.ValueOf<bool>("foo").Should().Be(true);
         }
@@ -170,7 +170,7 @@ namespace Tests
                 );
 
             var parser = new CommandLineParser(command);
-            var results = parser.Parse("test -foo -bar xyz".Tokenise());
+            var results = parser.Parse("test --foo --bar xyz".Tokenise());
             results.IsSuccess.Should().BeTrue();
             results.ValueOf<string>("foo").Should().Be(string.Empty);
             results.ValueOf<string>("bar").Should().Be("xyz");

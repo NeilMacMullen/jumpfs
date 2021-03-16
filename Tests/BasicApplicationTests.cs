@@ -50,16 +50,16 @@ namespace Tests
         [Test]
         public void SimpleBookmarking()
         {
-            Execute("mark -name here -path apath -literal");
-            Execute("find -name here");
+            Execute("mark --name here --path apath --literal");
+            Execute("find --name here");
             CheckOutput(@"apath");
         }
 
         [Test]
         public void FormattedBookmarking()
         {
-            Execute("mark -name here -path apath -line 15 -column 10 -literal");
-            Execute("find -name here -format %p:%l:%c");
+            Execute("mark --name here --path apath --line 15 --column 10 --literal");
+            Execute("find --name here --format %p:%l:%c");
             CheckOutput(@"apath:15:10");
         }
     }

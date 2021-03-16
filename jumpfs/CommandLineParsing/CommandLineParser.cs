@@ -15,7 +15,7 @@ namespace jumpfs.CommandLineParsing
     /// </remarks>
     public class CommandLineParser
     {
-        private const string CommandPrefix = "-";
+        private const string CommandPrefix = "--";
         private readonly CommandDescriptor[] _commands;
 
         public CommandLineParser(params CommandDescriptor[] args) => _commands = args.ToArray();

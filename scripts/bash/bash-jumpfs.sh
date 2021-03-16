@@ -23,17 +23,17 @@ export JUMPFS_WSL_ROOT
 
 
 mark() {
-      `$JumpFsExe mark -name $1 -path $2 -line $3 -column $4`
+      `$JumpFsExe mark --name $1 --path $2 --line $3 --column $4`
 }
 
 go() {
-    d=`$JumpFsExe find -name $1`
+    d=`$JumpFsExe find --name $1`
     cd $d
 }
 
 
 lst() {
-    matches=`$JumpFsExe list -match $1`
+    matches=`$JumpFsExe list --match $1`
     echo "$matches"
 }
 
@@ -46,20 +46,20 @@ jumpfs_info() {
 
 
 codego() {
-    d=`$JumpFsExe find -name $1 -format %p:%l:%c`
+    d=`$JumpFsExe find --name $1 --format %p:%l:%c`
     `code --goto "$d"`
 }
 
 
 
 bmk() {
-   d=`$JumpFsExe find -name $1 -format %p`
+   d=`$JumpFsExe find --name $1 --format %p`
    echo "$d"
 }
 
 
 x() {
-   d=`$JumpFsExe find -name $1 -winpath`
+   d=`$JumpFsExe find --name $1 --winpath`
    explorer.exe "$d"
 }
 
