@@ -4,8 +4,9 @@
 
 
 
-# WORK IN PROGRESS - check back in a few days !
+# EARLY ACCESS
 
+"Works for me" *TM* but I'd be keen to get feedback from others - particularly on the Linux side.  Raise an issue if you run into problems or drop me a line on Gitter.
 
 ## Give a Star! :star:
 
