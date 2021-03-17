@@ -8,6 +8,8 @@ Next, [download](doc/download.md) or [build](doc/buildFromSource.md) *jumpfs* an
 
 You'll need to add a few lines to your profile startup script.  If you're not sure where to find your profile, you can look at the `$profile` variable.  Most likely you'll see something like this.
 
+** IMPORTANT ** the ps-jumpfs.psm1 module is not signed so PowerShell will refuse to execute it unless use an Unrestricted execution policy (not advisable!).  The easiest "workaround" is to use a text editor to copy the contents of the file into another psm1 file then save and refer to that.   
+
 ```
 PS>$profile
 C:\Users\neilm\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
