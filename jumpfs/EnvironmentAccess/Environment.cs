@@ -14,6 +14,7 @@ namespace jumpfs.EnvironmentAccess
 
         public void WriteAllText(string location, string text)
         {
+            Directory.CreateDirectory(location);
             File.WriteAllText(location, text);
         }
 
