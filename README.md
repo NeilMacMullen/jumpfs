@@ -10,7 +10,7 @@ Current status is *"Works for me - TM"* but I'd be keen to get feedback from oth
 
 ## Current Known Issues
 
-- You may need to create the folder `C:\Users\<your user name>\AppData\Local\jumpfs` by hand
+- You may need to create the folder `C:\Users\<your user name>\AppData\Local\jumpfs` by hand.  (Fixed in V1.1.0) 
 - Powershell installation needs a manual step to work around execution policy
 
 <hr/>
