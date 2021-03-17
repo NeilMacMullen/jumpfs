@@ -7,6 +7,12 @@
 # !!! EARLY ACCESS !!!
 
 Current status is *"Works for me - TM"* but I'd be keen to get feedback from others - particularly on the Linux side.  Raise an issue if you run into problems or drop me a line on Gitter.
+
+## Current Known Issues
+
+- You may need to create the folder `C:\Users\<your user name>\AppData\Local\jumpfs` by hand
+- Powershell installation needs a manual step to work around execution policy
+
 <hr/>
 
 ## Give a Star! :star:
