@@ -15,7 +15,7 @@ PS>$profile
 C:\Users\neilm\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
 ```
 
-** IMPORTANT ** the ps-jumpfs.psm1 module is not signed so PowerShell will refuse to execute it unless use an Unrestricted execution policy (not advisable!).  The easiest "workaround" is to use a text editor to copy the contents of the file into another psm1 file then save and refer to that.   
+** IMPORTANT ** the ps-jumpfs.psm1 module is not signed so PowerShell will refuse to execute it unless using an Unrestricted execution policy (not advisable!).  The easiest "workaround" is to use a text editor to copy the contents of the file into another psm1 file then save and refer to that. Alternatively replace the `import-module` line below with the contents of *ps-jumpfs.psm1*   
 
 You'll then need to add these lines to the end of the script.  Modify the `jumpfs_path` line to point to the folder you stored the files.
 
