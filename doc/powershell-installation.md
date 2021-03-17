@@ -11,11 +11,15 @@ You'll need to add a few lines to your profile startup script.  If you're not su
 
 
 ```
-PS>$profile
+PS> $profile
 C:\Users\neilm\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
 ```
 
-** IMPORTANT ** the ps-jumpfs.psm1 module is not signed so PowerShell will refuse to execute it unless using an Unrestricted execution policy (not advisable!).  The easiest "workaround" is to use a text editor to copy the contents of the file into another psm1 file then save and refer to that. Alternatively replace the `import-module` line below with the contents of *ps-jumpfs.psm1*   
+** IMPORTANT ** the ps-jumpfs.psm1 module is not signed so PowerShell will refuse to execute it unless using an Unrestricted execution policy (not advisable!). The easiest workaround is to unblock the file manually (after you've reviewed the contents of course!) ...
+
+```
+PS> unblock-file C:\tools\jumpfs\ps-jumpfs.psm1
+```
 
 You'll then need to add these lines to the end of the script.  Modify the `jumpfs_path` line to point to the folder you stored the files.
 
