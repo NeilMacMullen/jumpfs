@@ -1,7 +1,7 @@
 # Installing for WSL 
 Ensure you have [.NET 5.0 for Linux](https://dotnet.microsoft.com/download/dotnet/5.0) installed.  You only need the *.NET Runtime* unless you are planning to [build from source](doc/buildFromSource.md).
 
-Next, [download](doc/download.md) or [build](doc/buildFromSource.md) the tool and copy the files to a folder such as `/mnt/c/tools/jumpfs`.   
+Next, [download](doc/download.md) or [build](buildFromSource.md) the tool and copy the files to a folder such as `/mnt/c/tools/jumpfs`.   
 
 *You can share a single "installation" of jumpfs between Windows and Linux. If you do this, it's best to use a folder in the Windows file-system. **/mnt/c/** is the root of the Windows **C:** drive.
 
