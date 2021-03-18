@@ -1,6 +1,6 @@
 # FAQ
 
-## Why not just use [ZLocation](https://github.com/vors/ZLocation)/  ?
+## Why not just use [ZLocation](https://github.com/vors/ZLocation)  ?
 
 I wasn't aware of this when writing jumpfs. It looks great! If your day-to-day usage is just getting around folders in PowerShell it's probably a better solution.
 
@@ -27,3 +27,11 @@ Yes, that would certainly be better if I didn't want it to support Bash and Cmd 
 ### How can I find out if there's a newer version with better features?
 
 Run the `jumpfs_info` command  - it will check for new versions.
+
+### Where is the bookmark file?
+
+Run the `jumpfs_info` command  - it will tell you.
+
+### Why did you use JSON for the bookmark file?
+
+Because it's a reasonable compromise between human and machine-readable and .Net has a Json serializer built in. I wanted to be able to hack the file by hand if necessary and to allow (at least, in principle) for other client applications to use the same bookmark file. 
