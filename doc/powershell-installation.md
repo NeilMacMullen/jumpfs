@@ -2,7 +2,7 @@
 
 Ensure you have [.NET 5.0 for Windows](https://dotnet.microsoft.com/download/dotnet/5.0) installed.  You only need the *.NET Runtime* unless you are planning to [build from source](buildFromSource.md).
 
-Next, [download](doc/download.md) or [build](buildFromSource.md) *jumpfs* and copy the files to a folder such as `C:\tools\jumpfs`.    
+Next, [download](download.md) or [build](buildFromSource.md) *jumpfs* and copy the files to a folder such as `C:\tools\jumpfs`.    
 
 *You can share a single "installation" of jumpfs between Windows and Linux. If you do this, it's best to use a folder in the Windows file-system.*
 
