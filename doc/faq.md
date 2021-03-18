@@ -24,4 +24,6 @@ Yes, that would certainly be better if I didn't want it to support Bash and Cmd 
 
 *go* and *mark* in particular are popular verbs. Apologies if you are a golang developer.  You're free to edit the scripts to change them to suit yourself !
 
+### How can I find out if there's a newer version with better features?
 
+Run the `jumpfs_info` command  - it will check for new versions.
