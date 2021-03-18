@@ -66,8 +66,6 @@ Gets the path of a bookmark so you can use it in a command.  For example:
 ls (bp myplace)
 ```
 
-
-
 ### jumpfs_info - display version and other information
 **jumpfs_info** will provide version and environment information. 
 
@@ -75,6 +73,9 @@ ls (bp myplace)
 
 See the [jumpfs parameter reference](doc/jumpfs-exe.md)
 
+
+## *"What's wrong with ZLocation?"* and other questions
+Read the [faq](doc/faq.md) 
 
 ## Contributions
 PRs are welcome.  Particularly to documentation and Linux-side scripts!  Please read the
