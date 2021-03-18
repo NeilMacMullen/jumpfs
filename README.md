@@ -48,6 +48,8 @@ The main commands are listed below but you can create your own quite easily by r
  - `mark name path` creates a bookmark at the supplied folder or file
  - `mark name path 10 5` creates a bookmark with line number and column
 
+jumpfs will silently overwrite an existing bookmark of the same name.  This is by design since bookmarks are meant to be lightweight and ephemeral.   If you don't like this behaviour, raise an issue and I'll consider adding a way to customise it. 
+
 ### go - go to a bookmark
 **go** only takes a single argument which is the name of the bookmark.  Note that if you *go* to a file, you will actually be taken to the folder that contains it.
 
