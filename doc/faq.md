@@ -35,3 +35,6 @@ Run the `jumpfs_info` command  - it will tell you.
 ### Why did you use JSON for the bookmark file?
 
 Because it's a reasonable compromise between human and machine-readable and .Net has a Json serializer built in. I wanted to be able to hack the file by hand if necessary and to allow (at least, in principle) for other client applications to use the same bookmark file. 
+
+### Why isn't there a way to delete bookmarks
+Ooops - forgot to include this in the first release.  Coming soon....
