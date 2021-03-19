@@ -8,6 +8,7 @@ using jumpfs.EnvironmentAccess;
 using jumpfs.Extensions;
 using NUnit.Framework;
 using Tests.SupportClasses;
+using Environment = System.Environment;
 
 namespace Tests
 {
@@ -66,13 +67,30 @@ namespace Tests
         }
 
         [Test]
+        public void FindOfMissingBookmarkReturnsEmptyLine()
+        {
+            Execute("find --name here");
+            GetStdOut().Should().Be(EmptyLine);
+        }
+
+
+        [Test]
+        public void FindOfMissingBookmarkReturnsEmptyLineEvenWhenFormatSpecified()
+        {
+            Execute("find --name here --format \"asdfasdf\"");
+            GetStdOut().Should().Be(EmptyLine);
+        }
+
+        private static readonly string EmptyLine = "" + Environment.NewLine;
+
+        [Test]
         public void RemoveWorks()
         {
             Execute("mark --name here --path apath --literal");
             Execute("remove --name here");
             CheckOutput(@"apath");
             Execute("remove --name here");
-            GetStdOut().Should().BeEmpty();
+            GetStdOut().Should().Be(EmptyLine);
         }
 
 

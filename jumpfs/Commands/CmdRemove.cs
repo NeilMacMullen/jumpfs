@@ -20,6 +20,8 @@ namespace jumpfs.Commands
             {
                 context.WriteLine($"Removed {v.Name} --> {v.Path}");
             }
+
+            context.WriteLine("");
         }
     }
 }
