@@ -12,8 +12,8 @@ If you like, or are using this project please give it a star - thanks!
 
 ### vNext (source only)
 - Implemented 'remove'
-- powershell module now better organised
-- powershell now has better handling for missing bookmarks
+- powershell and bash modules now better organised
+- better handling for missing bookmarks
 - If you pass an actual path instead of a bookmark, jumpfs now does the "right thing" in most cases.
 
 ### v1.1.0
@@ -43,7 +43,7 @@ Follow the instructions to
 
 The main commands are listed below but you can create your own quite easily by reading the [advanced usage](doc/advanced.md) guide.
 
-Commands have both long function names and shorter aliases, shown in brackets below.  Aliases are defined at the top of *ps-jumpfs.psm1* 
+Commands have both long function names and shorter aliases, shown in brackets below.  Aliases are defined at the top of *ps-jumpfs.psm1* and *bash-jumpfs.sh*
 
 ### jumpfs_mark (mark) - create a bookmark
 **mark** can take up to 4 arguments.  The first is the name you want to use for the bookmark.  The remainder are *path*, *line-number* and *column-number*.  The latter two are useful when specifying a bookmark to a particular position within a file.
