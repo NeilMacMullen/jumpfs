@@ -14,7 +14,7 @@ function mark($p,$r,$l,$c) {
 #go to a bookmark 
 function go($p) {
     $path = (jumpfs.exe find --name $p) ;
-    set-location $path;
+    set-location "$path"
     #write-host (Get-Location).Path
 }
 
@@ -24,14 +24,19 @@ function lst($p) { jumpfs.exe list --match $p }
 #open VS Code at a bookmark
 function codego($p) { 
  $path = (jumpfs.exe find --name $p --format "%p:%l:%c") ;
- code --goto $path
+ code --goto "$path"
 }
 
 # open file-explorer at bookmark
 function x($p) { 
- $path = (jumpfs.exe find --name $p) ;
- explorer $path
+ $path = (jumpfs.exe find --name $p) 
+ explorer "$path"
 }
+
+function xf($p) { 
+    $path = (jumpfs.exe find --name $p --format "%p") ;
+    explorer "$path"
+   }
 
 # get the path of a bookmark - useful for building command lines
 function bp($p) {

@@ -14,7 +14,8 @@ namespace jumpfs.Commands
                 CmdInfo.Descriptor,
                 CmdMark.Descriptor,
                 CmdFind.Descriptor,
-                CmdList.Descriptor
+                CmdList.Descriptor,
+                CmdRemove.Descriptor
             );
             return parser;
         }

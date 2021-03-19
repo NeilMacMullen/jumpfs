@@ -18,5 +18,8 @@ namespace jumpfs.Extensions
             selected = matches.First();
             return true;
         }
+
+        public static T SingleOr<T>(this IEnumerable<T> items, Func<T, bool> selector, T fallback)
+            => items.TryGetSingle(selector, out var s) ? s : fallback;
     }
 }

@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 using FluentAssertions;
 using jumpfs;
 using jumpfs.Bookmarking;
@@ -16,7 +17,8 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            _stdout = new StringWriter();
+            _sb = new StringBuilder();
+            _stdout = new StringWriter(_sb);
             _stderr = new StringWriter();
             _env = new MockEnvironment(ShellType.PowerShell, new MockFileSystem());
             if (ShellGuesser.IsUnixy())
@@ -37,6 +39,7 @@ namespace Tests
         private StringWriter _stderr;
 
         private StringWriter _stdout;
+
         private MockEnvironment _env;
 
         private void Execute(string cmd)
@@ -44,8 +47,15 @@ namespace Tests
             JumpFs.ExecuteWithContext(cmd.Tokenise(), _context);
         }
 
-        private string GetStdOut() => _stdout.ToString();
-        private void CheckOutput(string expected) => GetStdOut().Trim().Should().EndWith(expected);
+
+        private StringBuilder _sb;
+        private string GetStdOut() => _sb.ToString();
+
+        private void CheckOutput(string expected)
+        {
+            GetStdOut().Trim().Should().EndWith(expected);
+            _sb.Clear();
+        }
 
         [Test]
         public void SimpleBookmarking()
@@ -54,6 +64,17 @@ namespace Tests
             Execute("find --name here");
             CheckOutput(@"apath");
         }
+
+        [Test]
+        public void RemoveWorks()
+        {
+            Execute("mark --name here --path apath --literal");
+            Execute("remove --name here");
+            CheckOutput(@"apath");
+            Execute("remove --name here");
+            GetStdOut().Should().BeEmpty();
+        }
+
 
         [Test]
         public void FormattedBookmarking()
