@@ -1,12 +1,32 @@
 #!/bin/bash
 
-#this should already be on the path
+# configuration
+
+# use standard script aliases.  If you want to set up custom ones
+# you can  edit those below
+jumpfs_use_standard_alias="1"
+
+### Standard aliases - feel free to change
+if [ "$jumpfs_use_standard_alias" -eq "1" ] ;
+then
+    alias mark="jumpfs_mark"
+    alias go="jumpfs_go"
+    alias lst="jumpfs_list"
+    alias rmbk="jumpfs_remove"
+    alias codego="jumpfs_code"
+    alias x="jumpfs_explorer_folder"
+    alias xr="jumpfs_explorer_run"
+    alias bp="jumpfs_value"
+fi
+
+
+# this should already be on the path
 JumpFsExe="jumpfs"
 
 # JumpFs needs to know where to look for the bookmarks file
 # wslvar appears to be quite slow so you can speed up the startup
 # by hardcoding the result rather than looking it up on every startup
-# For 'bare' LINUX, you should just set this to a folder that will be used 
+# For 'bare' LINUX, you should just set this to a folder that will be used
 # to contain the bookmark file
 loc="$(wslvar LOCALAPPDATA)"
 JUMPFS_FOLDER="$(wslpath $loc)"
@@ -19,7 +39,9 @@ export JUMPFS_FOLDER
 JUMPFS_WSL_ROOT="$(wslpath -w /)"
 export JUMPFS_WSL_ROOT
 
-#Feel free to change the names of the scripts to suit you....
+
+### Functions #######################
+
 
 # jumpfs info
 jumpfs_info() {
@@ -28,39 +50,59 @@ jumpfs_info() {
 }
 
 
-# create a bookmark 
-mark() {
-      `$JumpFsExe mark --name $1 --path $2 --line $3 --column $4`
+# create a bookmark
+jumpfs_mark() {
+    `$JumpFsExe mark --name $1 --path $2 --line $3 --column $4`
 }
 
-#go to a bookmark 
-go() {
+#go to a bookmark
+jumpfs_go() {
     d=`$JumpFsExe find --name $1`
-    cd $d
+    if [ -n "$d" ]; then
+        cd $d
+    fi
 }
 
 # list bookmarks
-lst() {
+jumpfs_list() {
     matches=`$JumpFsExe list --match $1`
     echo "$matches"
 }
 
+# list bookmarks
+jumpfs_remove() {
+    `$JumpFsExe remove --name $1`
+}
+
 #open VS Code at a bookmark
-codego() {
+jumpfs_code() {
     d=`$JumpFsExe find --name $1 --format %p:%l:%c`
-    `code --goto "$d"`
+    if [ -n "$d" ]; then
+        `code --goto "$d"`
+    fi
 }
 
 # open file-explorer at bookmark
-x() {
-   d=`$JumpFsExe find --name $1 --winpath`
-   explorer.exe "$d"
+jumpfs_explorer_folder() {
+    d=`$JumpFsExe find --name $1 --winpath`
+    if [ -n "$d" ]; then
+        explorer.exe "$d"
+    fi
+}
+
+
+# open file-explorer at bookmark
+jumpfs_explorer_run() {
+    d=`$JumpFsExe find --name $1 --format %p --winpath`
+    if [ -n "$d" ]; then
+        explorer.exe "$d"
+    fi
 }
 
 # get the path of a bookmark - useful for building command lines
-bp() {
-   d=`$JumpFsExe find --name $1 --format %p`
-   echo "$d"
+jumpfs_value() {
+    d=`$JumpFsExe find --name $1 --format %p`
+    echo "$d"
 }
 
 
