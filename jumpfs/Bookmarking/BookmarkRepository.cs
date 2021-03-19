@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using jumpfs.EnvironmentAccess;
+using jumpfs.Extensions;
 
 namespace jumpfs.Bookmarking
 {
@@ -38,9 +39,6 @@ namespace jumpfs.Bookmarking
         {
             var all = Load();
             var matches = all.Where(m => m.Name.Contains(match) || m.Path.Contains(match)).ToArray();
-            //TODO - remove temporary fix for migration
-            foreach (var m in matches.Where(b => b.Type == BookmarkType.Unknown))
-                m.Type = BookmarkType.Folder;
             return matches;
         }
 
@@ -74,9 +72,16 @@ namespace jumpfs.Bookmarking
         public Bookmark Find(string name)
         {
             var marks = Load();
-            var existing = marks.SingleOrDefault(m => m.Name == name)
-                           ?? new Bookmark();
-            return existing;
+            return marks.SingleOr(m => m.Name == name, new Bookmark());
+        }
+
+        public Bookmark[] Remove(string name)
+        {
+            var marks = Load();
+            var victim = marks.SingleOr(m => m.Name == name, new Bookmark());
+            marks = marks.Where(m => m != victim).ToArray();
+            Save(marks);
+            return new[] {victim}.Where(v => v.Name.Length > 0).ToArray();
         }
     }
 

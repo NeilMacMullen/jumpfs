@@ -36,12 +36,38 @@ specifiers can be combined and separated .  For example:
             var name = results.ValueOf<string>(Names.Name);
             var format = results.ValueOf<string>(Names.Format);
             var mark = context.Repo.Find(name);
+
             var path = results.ValueOf<bool>(Names.Win)
                 ? context.ToWindows(mark.Path)
                 : context.ToNative(mark.Path);
+
+
             var folder = (mark.Type == BookmarkType.File)
                 ? Path.GetDirectoryName(path)
                 : path;
+
+
+            if (mark.Name.Length == 0)
+            {
+                //if we couldn't find the bookmark there is a chance the user gave us an actual path to use
+                if (context.Repo.Environment.FileExists(name))
+                {
+                    path = name;
+                    folder = Path.GetDirectoryName(path);
+                }
+                else if (context.Repo.Environment.DirectoryExists(name))
+                {
+                    path = folder = name;
+                }
+                else
+                {
+                    //we've run out of options - it's probably a missing bookmark so return an empty line
+                    context.WriteLine("");
+                    return;
+                }
+            }
+
+
             var drive = path.Length > 0 ? path.Substring(0, 1) : string.Empty;
             if (format.Length == 0)
             {

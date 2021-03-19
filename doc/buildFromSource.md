@@ -5,6 +5,15 @@ You can build jumpfs from either Windows or Linux; if you are intending to use i
 
 First, ensure that you have the [.NET 5 SDK](https://dotnet.microsoft.com/download/dotnet/5.0) installed.
 
+
+If you want to build the *bleeding-edge* checkout *main*
+
+`git checkout main`
+
+If you want to build one of the stable releases, checkout one of the release tags
+
+`git checkout tags/v1.1.0`
+
 ## PowerShell
 Run the **build.ps** script in the top *jumps* folder.
 
