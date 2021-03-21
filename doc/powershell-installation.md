@@ -24,14 +24,19 @@ PS> unblock-file C:\tools\jumpfs\ps-jumpfs.psm1
 You'll then need to add these lines to the end of the script.  Modify the `jumpfs_path` line to point to the folder you stored the files.
 
 ```
-#change this line...
+# change this line...
 $jumpfs_path = "C:\tools\jumpfs"
-
-Import-Module "$jumpfs_path\ps-jumpfs.psm1"
 $env:Path = $env:Path+";$jumpfs_path"
+Import-Module "$jumpfs_path\ps-jumpfs.psm1"
+
+# OPTIONAL - install virtual drive (PS 7.x only, has no effect on earlier versions)
+jumpfs_install_drive $jumpfs_path "jfs"
 ```
 
 
 That's it!  Jumpfs should be available when you start your next PowerShell session.  You can confirm this by running `jumpfs_info`.
+
+IF you chose to install the [virtual drive](doc/../psdrive.md) you can list bookmarks with `ls jfs:`
+
 
 

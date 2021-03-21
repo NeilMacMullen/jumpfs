@@ -1,6 +1,5 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Provider;
@@ -111,29 +110,17 @@ namespace DriveProvider
 
         #region CONTENT
 
-        public void ClearContent(string path)
-        {
-            Debug(path);
-            //throw new NotImplementedException();
-        }
-
-        public object ClearContentDynamicParameters(string path)
-        {
-            Debug(path);
-            //throw new NotImplementedException();
-            return null;
-        }
-
         public IContentReader GetContentReader(string path)
         {
             Debug(path);
             var bookmarks = _repo.Load();
-            if (bookmarks.TryGetSingle(b => b.Name == TranslatePath(path), out var hit))
+            path = TranslatePath(path);
+            if (bookmarks.TryGetSingle(b => b.Name == path, out var hit))
             {
                 return new BookmarkContentReader(hit.Path);
             }
 
-            return new BookmarkContentReader(string.Empty);
+            throw new ArgumentException($"{path} is not a valid bookmark name");
         }
 
         public object GetContentReaderDynamicParameters(string path)
@@ -142,19 +129,35 @@ namespace DriveProvider
             return null;
         }
 
+        #region CONTENT notimplemented
+
+        public void ClearContent(string path)
+        {
+            Debug(path);
+            throw new NotImplementedException();
+        }
+
+        public object ClearContentDynamicParameters(string path)
+        {
+            Debug(path);
+            throw new NotImplementedException();
+        }
+
         public IContentWriter GetContentWriter(string path)
         {
             Debug(path);
-            return null;
+            throw new NotImplementedException();
         }
 
         public object GetContentWriterDynamicParameters(string path)
         {
             Debug(path);
-            return null;
+            throw new NotImplementedException();
         }
 
-        #endregion
+        #endregion CONTENT notimplemented
+
+        #endregion CONTENT
 
         #region tracing - no overridden code here
 
@@ -361,29 +364,5 @@ namespace DriveProvider
         }
 
         #endregion
-    }
-
-    public class BookmarkContentReader : IContentReader
-    {
-        private readonly string _path;
-
-        public BookmarkContentReader(string path) => _path = path;
-
-        public void Dispose()
-        {
-        }
-
-        public void Close()
-        {
-        }
-
-        public IList Read(long readCount)
-        {
-            return new[] {_path}.ToList();
-        }
-
-        public void Seek(long offset, SeekOrigin origin)
-        {
-        }
     }
 }
