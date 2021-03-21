@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Core;
@@ -10,7 +9,7 @@ namespace jumpfs.Commands
     public class ApplicationContext
     {
         private readonly PathConverter _pathConverter;
-        public readonly string[] Args = Array.Empty<string>();
+        public readonly string[] Args;
         public readonly TextWriter ErrorStream;
         public readonly TextWriter OutputStream;
         public readonly BookmarkRepository Repo;
