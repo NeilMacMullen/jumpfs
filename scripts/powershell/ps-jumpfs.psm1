@@ -20,8 +20,11 @@ if ($jumpfs_use_standard_alias) {
 
 ## EXPERIMENTAL - expose bookmarks as a virtual drive
 function jumpfs_install_drive($publish, $name) {
-    Import-Module   "$publish\driveProviders\DriveProvider.dll"
-    New-PSDrive -Name "$name" -PSProvider "jumpfs" -Root "$($name):\" -Scope Global
+    #virtual drive only supported on PS 7 and later
+    if ($PSVersionTable.PSVersion.Major -ge 7) {
+        Import-Module   "$publish\driveProviders\DriveProvider.dll"
+        New-PSDrive -Name "$name" -PSProvider "jumpfs" -Root "$($name):\" -Scope Global
+    }
 }
 
 ################################
