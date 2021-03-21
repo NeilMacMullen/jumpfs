@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text;
 using FluentAssertions;
@@ -8,7 +9,6 @@ using jumpfs.EnvironmentAccess;
 using jumpfs.Extensions;
 using NUnit.Framework;
 using Tests.SupportClasses;
-using Environment = System.Environment;
 
 namespace Tests
 {
@@ -21,7 +21,7 @@ namespace Tests
             _sb = new StringBuilder();
             _stdout = new StringWriter(_sb);
             _stderr = new StringWriter();
-            _env = new MockEnvironment(ShellType.PowerShell, new MockFileSystem());
+            _env = new MockJumpfsEnvironment(ShellType.PowerShell, new MockFileSystem());
             if (ShellGuesser.IsUnixy())
             {
                 _env.SetCwd(@"/usr");
@@ -41,7 +41,7 @@ namespace Tests
 
         private StringWriter _stdout;
 
-        private MockEnvironment _env;
+        private MockJumpfsEnvironment _env;
 
         private void Execute(string cmd)
         {

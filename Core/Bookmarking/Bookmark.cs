@@ -11,15 +11,4 @@
         public int Column { get; set; }
         public BookmarkType Type { get; set; }
     }
-
-    public enum BookmarkType
-    {
-        Unknown,
-        File,
-        Folder,
-
-        //Not yet supported
-        Url,
-        Script
-    }
 }

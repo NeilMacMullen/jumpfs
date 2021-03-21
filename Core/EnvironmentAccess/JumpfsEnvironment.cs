@@ -1,10 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace jumpfs.EnvironmentAccess
 {
-    public class Environment : IEnvironment
+    public class JumpfsEnvironment : IJumpfsEnvironment
     {
-        public Environment() => ShellType = ShellGuesser.GuessShell(this);
+        public JumpfsEnvironment() => ShellType = ShellGuesser.GuessShell(this);
 
         public ShellType ShellType { get; init; }
         public bool DirectoryExists(string path) => Directory.Exists(path);
@@ -20,10 +21,10 @@ namespace jumpfs.EnvironmentAccess
         }
 
         public string GetEnvironmentVariable(string name) =>
-            System.Environment.GetEnvironmentVariable(name) ?? string.Empty;
+            Environment.GetEnvironmentVariable(name) ?? string.Empty;
 
-        public string GetFolderPath(System.Environment.SpecialFolder folderName) =>
-            System.Environment.GetFolderPath(folderName);
+        public string GetFolderPath(Environment.SpecialFolder folderName) =>
+            Environment.GetFolderPath(folderName);
 
         public string Cwd() => Directory.GetCurrentDirectory();
     }

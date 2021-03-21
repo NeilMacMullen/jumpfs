@@ -32,7 +32,7 @@ namespace jumpfs.Commands
 
             if (!results.ValueOf<bool>(Names.Literal))
                 path = context.ToAbsolutePath(path);
-            var type = context.Repo.Environment.FileExists(path) ? BookmarkType.File : BookmarkType.Folder;
+            var type = context.Repo.JumpfsEnvironment.FileExists(path) ? BookmarkType.File : BookmarkType.Folder;
             context.Repo.Mark(type, name, path, line, column);
         }
     }

@@ -8,8 +8,8 @@ namespace jumpfs.Commands
     /// </summary>
     public class FullPathCalculator
     {
-        public FullPathCalculator(IEnvironment env) => Env = env;
-        public IEnvironment Env { get; set; }
+        public FullPathCalculator(IJumpfsEnvironment env) => Env = env;
+        public IJumpfsEnvironment Env { get; set; }
 
         /// <summary>
         ///     Returns an absolute (rooted) path

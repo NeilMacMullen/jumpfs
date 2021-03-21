@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using jumpfs;
 using jumpfs.EnvironmentAccess;
-using Environment = System.Environment;
 
 namespace Tests.SupportClasses
 {
@@ -30,14 +30,14 @@ namespace Tests.SupportClasses
     }
 
     //Mocks up the environment so we can test with a fake bookmark file
-    public class MockEnvironment : IEnvironment
+    public class MockJumpfsEnvironment : IJumpfsEnvironment
     {
         private readonly Dictionary<string, string> _env = new();
         private readonly MockFileSystem _fileSystem;
         private string _cwd = string.Empty;
 
 
-        public MockEnvironment(ShellType shellType, MockFileSystem fs)
+        public MockJumpfsEnvironment(ShellType shellType, MockFileSystem fs)
         {
             ShellType = shellType;
             _fileSystem = fs;

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using jumpfs.EnvironmentAccess;
 using jumpfs.Extensions;
 
@@ -16,23 +17,31 @@ namespace jumpfs.Bookmarking
     public class BookmarkRepository
     {
         public readonly string BookmarkFile;
-        public readonly IEnvironment Environment;
+        public readonly IJumpfsEnvironment JumpfsEnvironment;
 
-        public BookmarkRepository(IEnvironment environment)
+        public BookmarkRepository(IJumpfsEnvironment jumpfsEnvironment)
         {
-            Environment = environment;
+            JumpfsEnvironment = jumpfsEnvironment;
             BookmarkFile = Path.Combine(Folder, "jumpfs", "bookmarks.json");
         }
 
         public string Folder =>
-            (Environment.ShellType == ShellType.Wsl)
-                ? Environment.GetEnvironmentVariable(EnvVariables.WslEnvVar).Trim()
-                : Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+            (JumpfsEnvironment.ShellType == ShellType.Wsl)
+                ? JumpfsEnvironment.GetEnvironmentVariable(EnvVariables.WslEnvVar).Trim()
+                : JumpfsEnvironment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
         public Bookmark[] Load()
         {
-            var text = !Environment.FileExists(BookmarkFile) ? "[]" : Environment.ReadAllText(BookmarkFile);
+            var text = !JumpfsEnvironment.FileExists(BookmarkFile) ? "[]" : JumpfsEnvironment.ReadAllText(BookmarkFile);
             return JsonSerializer.Deserialize<Bookmark[]>(text);
+        }
+
+
+        public static Bookmark[] Match(Bookmark[] bookmarks, string search)
+        {
+            var regex = RegexTranslator.RegexFromPowershell(search);
+            bookmarks = bookmarks.Where(b => Regex.IsMatch(b.Name, regex)).ToArray();
+            return bookmarks;
         }
 
         public Bookmark[] List(string match)
@@ -46,7 +55,7 @@ namespace jumpfs.Bookmarking
         public void Save(Bookmark[] bookmarks)
         {
             var text = JsonSerializer.Serialize(bookmarks, new JsonSerializerOptions {WriteIndented = true});
-            Environment.WriteAllText(BookmarkFile, text);
+            JumpfsEnvironment.WriteAllText(BookmarkFile, text);
         }
 
         public void Mark(BookmarkType type, string name, string path) => Mark(type, name, path, 0, 0);
@@ -83,16 +92,5 @@ namespace jumpfs.Bookmarking
             Save(marks);
             return new[] {victim}.Where(v => v.Name.Length > 0).ToArray();
         }
-    }
-
-    public class BookmarkSet
-    {
-        public JumpFsConfiguration Configuration { get; set; } = JumpFsConfiguration.Empty;
-        public Bookmark[] Bookmarks { get; set; } = Array.Empty<Bookmark>();
-    }
-
-    public class JumpFsConfiguration
-    {
-        public static readonly JumpFsConfiguration Empty = new();
     }
 }

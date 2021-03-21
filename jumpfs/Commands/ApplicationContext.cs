@@ -21,16 +21,16 @@ namespace jumpfs.Commands
 
             OutputStream = outputStream;
             ErrorStream = errorStream;
-            _pathConverter = new PathConverter(repo.Environment.GetEnvironmentVariable(EnvVariables.WslRootVar));
+            _pathConverter = new PathConverter(repo.JumpfsEnvironment.GetEnvironmentVariable(EnvVariables.WslRootVar));
         }
 
         public void WriteLine(string str) => OutputStream.WriteLine(str);
-        public string ToNative(string path) => _pathConverter.ToShell(Repo.Environment.ShellType, path);
+        public string ToNative(string path) => _pathConverter.ToShell(Repo.JumpfsEnvironment.ShellType, path);
         public string ToWindows(string path) => _pathConverter.ToShell(ShellType.PowerShell, path);
 
         public string ToAbsolutePath(string path)
         {
-            var pm = new FullPathCalculator(Repo.Environment);
+            var pm = new FullPathCalculator(Repo.JumpfsEnvironment);
             var abs = pm.ToAbsolute(path);
             return _pathConverter.ToShell(ShellType.PowerShell, abs);
         }
