@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace jumpfs.EnvironmentAccess
+namespace Core.EnvironmentAccess
 {
     /// <summary>
     ///     Provides a way of abstracting the file system and environment which is handy for testing

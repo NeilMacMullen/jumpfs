@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace jumpfs.Extensions
+namespace Core.Extensions
 {
     public static class StringExtensions
     {

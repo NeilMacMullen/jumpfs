@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using jumpfs.Extensions;
+using Core.Extensions;
 
-namespace jumpfs.Bookmarking
+namespace Core.Bookmarking
 {
     /// <summary>
     ///     Converts paths between Windows and Linux/WSL

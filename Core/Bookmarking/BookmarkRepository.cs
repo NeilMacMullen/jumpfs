@@ -3,10 +3,10 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using jumpfs.EnvironmentAccess;
-using jumpfs.Extensions;
+using Core.EnvironmentAccess;
+using Core.Extensions;
 
-namespace jumpfs.Bookmarking
+namespace Core.Bookmarking
 {
     /// <summary>
     ///     A repository for bookmarks

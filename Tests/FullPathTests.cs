@@ -1,7 +1,7 @@
+using Core;
+using Core.EnvironmentAccess;
 using FluentAssertions;
-using jumpfs;
 using jumpfs.Commands;
-using jumpfs.EnvironmentAccess;
 using NUnit.Framework;
 using Tests.SupportClasses;
 

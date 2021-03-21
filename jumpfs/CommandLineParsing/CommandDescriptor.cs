@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
+using Core.Extensions;
 using jumpfs.Commands;
-using jumpfs.Extensions;
 
 namespace jumpfs.CommandLineParsing
 {

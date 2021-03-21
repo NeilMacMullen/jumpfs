@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using jumpfs.EnvironmentAccess;
+using Core.EnvironmentAccess;
 
 namespace jumpfs.Commands
 {

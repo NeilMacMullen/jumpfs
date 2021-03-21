@@ -5,9 +5,9 @@ using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Provider;
 using System.Runtime.CompilerServices;
-using jumpfs.Bookmarking;
-using jumpfs.EnvironmentAccess;
-using jumpfs.Extensions;
+using Core.Bookmarking;
+using Core.EnvironmentAccess;
+using Core.Extensions;
 
 namespace DriveProvider
 {

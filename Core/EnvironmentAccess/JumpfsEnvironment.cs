@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
 
-namespace jumpfs.EnvironmentAccess
+namespace Core.EnvironmentAccess
 {
     public class JumpfsEnvironment : IJumpfsEnvironment
     {
         public JumpfsEnvironment() => ShellType = ShellGuesser.GuessShell(this);
 
-        public ShellType ShellType { get; init; }
+        public ShellType ShellType { get; }
         public bool DirectoryExists(string path) => Directory.Exists(path);
 
         public bool FileExists(string path) => File.Exists(path);

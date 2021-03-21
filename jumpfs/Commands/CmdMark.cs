@@ -1,4 +1,4 @@
-﻿using jumpfs.Bookmarking;
+﻿using Core.Bookmarking;
 using jumpfs.CommandLineParsing;
 
 namespace jumpfs.Commands

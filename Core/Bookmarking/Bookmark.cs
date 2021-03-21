@@ -1,4 +1,4 @@
-﻿namespace jumpfs.Bookmarking
+﻿namespace Core.Bookmarking
 {
     /// <summary>
     ///     A bookmark entry

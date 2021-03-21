@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace jumpfs.Bookmarking
+namespace Core.Bookmarking
 {
     public class BookmarkSet
     {

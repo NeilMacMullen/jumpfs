@@ -1,8 +1,8 @@
 using System;
+using Core.Extensions;
 using FluentAssertions;
 using jumpfs.CommandLineParsing;
 using jumpfs.Commands;
-using jumpfs.Extensions;
 using NUnit.Framework;
 
 namespace Tests

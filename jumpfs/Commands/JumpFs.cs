@@ -1,7 +1,7 @@
 ﻿using System;
-using jumpfs.Bookmarking;
+using Core.Bookmarking;
+using Core.EnvironmentAccess;
 using jumpfs.CommandLineParsing;
-using jumpfs.EnvironmentAccess;
 
 namespace jumpfs.Commands
 {

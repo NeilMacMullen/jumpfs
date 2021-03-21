@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using jumpfs.Bookmarking;
+using Core.Bookmarking;
 
-namespace jumpfs.EnvironmentAccess
+namespace Core.EnvironmentAccess
 {
     public static class ShellGuesser
     {

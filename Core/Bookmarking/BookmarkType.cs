@@ -1,4 +1,4 @@
-﻿namespace jumpfs.Bookmarking
+﻿namespace Core.Bookmarking
 {
     public enum BookmarkType
     {

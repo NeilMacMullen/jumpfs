@@ -1,10 +1,10 @@
 using System.IO;
+using Core;
+using Core.Bookmarking;
+using Core.EnvironmentAccess;
+using Core.Extensions;
 using FluentAssertions;
-using jumpfs;
-using jumpfs.Bookmarking;
 using jumpfs.Commands;
-using jumpfs.EnvironmentAccess;
-using jumpfs.Extensions;
 using NUnit.Framework;
 using Tests.SupportClasses;
 

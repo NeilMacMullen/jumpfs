@@ -1,6 +1,6 @@
+using Core;
+using Core.Bookmarking;
 using FluentAssertions;
-using jumpfs;
-using jumpfs.Bookmarking;
 using NUnit.Framework;
 
 namespace Tests

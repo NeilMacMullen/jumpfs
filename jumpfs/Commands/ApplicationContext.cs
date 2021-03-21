@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
-using jumpfs.Bookmarking;
+using Core;
+using Core.Bookmarking;
 
 namespace jumpfs.Commands
 {

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace jumpfs.Bookmarking
+namespace Core.Bookmarking
 {
     public static class RegexTranslator
     {

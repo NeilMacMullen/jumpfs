@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using jumpfs;
-using jumpfs.EnvironmentAccess;
+using Core;
+using Core.EnvironmentAccess;
 
 namespace Tests.SupportClasses
 {
