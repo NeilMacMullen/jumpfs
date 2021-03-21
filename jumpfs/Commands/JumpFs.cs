@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.Bookmarking;
 using Core.EnvironmentAccess;
 using jumpfs.CommandLineParsing;
@@ -20,13 +21,13 @@ namespace jumpfs.Commands
             return parser;
         }
 
-        public static ApplicationContext CliContext()
+        public static ApplicationContext CliContext(IEnumerable<string> args)
         {
             var outputStream = Console.Out;
             var errorStream = Console.Error;
 
             var repo = new BookmarkRepository(new JumpfsEnvironment());
-            return new ApplicationContext(repo, outputStream, errorStream);
+            return new ApplicationContext(repo, outputStream, errorStream, args);
         }
 
 

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Core;
 using Core.Bookmarking;
@@ -22,7 +23,7 @@ namespace Tests
             var winMock = new MockJumpfsEnvironment(ShellType.PowerShell, _fs);
             winMock.SetCwd(@"C:\");
             var winRepo = new BookmarkRepository(winMock);
-            _win = new ApplicationContext(winRepo, _stdout, _stderr);
+            _win = new ApplicationContext(winRepo, _stdout, _stderr, Array.Empty<string>());
             var wslMock = new MockJumpfsEnvironment(ShellType.Wsl, _fs);
             wslMock.SetCwd("/usr");
             wslMock.SetEnvironmentVariable(
@@ -35,7 +36,7 @@ namespace Tests
             );
             var wslRepo = new BookmarkRepository(wslMock);
 
-            _wsl = new ApplicationContext(wslRepo, _stdout, _stderr);
+            _wsl = new ApplicationContext(wslRepo, _stdout, _stderr, Array.Empty<string>());
         }
 
         private StringWriter _stdout;

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Core;
 using Core.Bookmarking;
 
@@ -16,10 +18,11 @@ namespace jumpfs.Commands
         public ApplicationContext(
             BookmarkRepository repo,
             TextWriter outputStream,
-            TextWriter errorStream)
+            TextWriter errorStream,
+            IEnumerable<string> args)
         {
             Repo = repo;
-
+            Args = args.ToArray();
             OutputStream = outputStream;
             ErrorStream = errorStream;
             _pathConverter = new PathConverter(repo.JumpfsEnvironment.GetEnvironmentVariable(EnvVariables.WslRootVar));

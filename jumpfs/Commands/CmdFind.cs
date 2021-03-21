@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using Core;
 using Core.Bookmarking;
 using jumpfs.CommandLineParsing;
 
@@ -27,16 +29,60 @@ specifiers can be combined and separated .  For example:
 
 --format %p:%l:%c
 
-")
+"), ArgumentDescriptor.Create<string>(Names.Type)
+                    .AllowEmpty()
+                    .WithHelpText("type (default restricts output to filesystem)")
             )
             .WithHelpText("locates a bookmark with the specified name and outputs the associated path");
 
         public static void Run(ParseResults results, ApplicationContext context)
         {
+            var type = results.ValueOf<string>(Names.Type);
+
+
             var name = results.ValueOf<string>(Names.Name);
-            var format = results.ValueOf<string>(Names.Format);
             var mark = context.Repo.Find(name);
 
+            var format = results.ValueOf<string>(Names.Format);
+
+            if (BookmarkTypeParser.IsFileSystem(mark.Type, type))
+            {
+                if (EmitFilesystem(results, context, mark, name, format))
+                    return;
+            }
+
+            if (BookmarkTypeParser.Match(mark.Type, type, BookmarkType.Url))
+            {
+                //no translation needed for URLs
+                context.WriteLine(mark.Path);
+                return;
+            }
+
+            //ensure we only emit scripts for the correct shell
+            var scriptTypes = new Dictionary<ShellType, BookmarkType>
+            {
+                [ShellType.PowerShell] = BookmarkType.PsCmd,
+                [ShellType.Linux] = BookmarkType.BashCmd,
+                [ShellType.Wsl] = BookmarkType.BashCmd,
+                [ShellType.Cmd] = BookmarkType.DosCmd,
+            };
+
+            if (scriptTypes.TryGetValue(context.Repo.JumpfsEnvironment.ShellType, out var scriptType))
+            {
+                if (BookmarkTypeParser.Match(mark.Type, type, scriptType))
+                {
+                    //no translation needed for Script
+                    context.WriteLine(mark.Path);
+                    return;
+                }
+            }
+
+            context.WriteLine("");
+        }
+
+        private static bool EmitFilesystem(ParseResults results, ApplicationContext context, Bookmark mark, string name,
+            string format)
+        {
             var path = results.ValueOf<bool>(Names.Win)
                 ? context.ToWindows(mark.Path)
                 : context.ToNative(mark.Path);
@@ -61,9 +107,7 @@ specifiers can be combined and separated .  For example:
                 }
                 else
                 {
-                    //we've run out of options - it's probably a missing bookmark so return an empty line
-                    context.WriteLine("");
-                    return;
+                    return false;
                 }
             }
 
@@ -85,6 +129,8 @@ specifiers can be combined and separated .  For example:
                     ;
                 context.WriteLine(format);
             }
+
+            return true;
         }
     }
 }
