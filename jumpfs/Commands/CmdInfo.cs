@@ -24,7 +24,7 @@ Runtime Info:
  - System:             {RuntimeEnvironment.GetSystemVersion()}
  - Architecture:       {RuntimeInformation.OSArchitecture}
  - OS:                 {RuntimeInformation.OSDescription}
- - Shell:              {context.Repo.Environment.ShellType}
+ - Shell:              {context.Repo.JumpfsEnvironment.ShellType}
 
 Useful links:
  - jumpfs homepage:    https://github.com/NeilMacMullen/jumpfs

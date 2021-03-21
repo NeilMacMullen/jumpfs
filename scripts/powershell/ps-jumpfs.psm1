@@ -5,6 +5,7 @@
 $jumpfs_warn = $false
 $jumpfs_use_standard_alias = $true
 
+
 ### Standard aliases - feel free to change 
 if ($jumpfs_use_standard_alias) {
     Set-Alias -name mark -value jumpfs_mark
@@ -15,6 +16,15 @@ if ($jumpfs_use_standard_alias) {
     Set-Alias -name x -value jumpfs_explorer_folder
     Set-Alias -name xr -value jumpfs_explorer_run
     Set-Alias -name bp -value jumpfs_value
+}
+
+## EXPERIMENTAL - expose bookmarks as a virtual drive
+function jumpfs_install_drive($publish, $name) {
+    #virtual drive only supported on PS 7 and later
+    if ($PSVersionTable.PSVersion.Major -ge 7) {
+        Import-Module   "$publish\driveProviders\DriveProvider.dll"
+        New-PSDrive -Name "$name" -PSProvider "jumpfs" -Root "$($name):\" -Scope Global
+    }
 }
 
 ################################

@@ -15,6 +15,7 @@ If you like, or are using this project please give it a star - thanks!
 - powershell and bash modules now better organised
 - better handling for missing bookmarks
 - If you pass an actual path instead of a bookmark, jumpfs now does the "right thing" in most cases.
+- Bookmarks can be exposed via [virtual drive](doc/psdrive.md) (Powershell 7 only)
 
 ### v1.1.0
 First public release package
@@ -83,7 +84,10 @@ ls (bp myplace)
 
 ## Advanced use and custom scripts
 
-See the [jumpfs parameter reference](doc/jumpfs-exe.md)
+
+How to use the PowerShell  [virtual drive](doc/psdrive.md)
+
+Create custom functions and scripts by calling jumpfs directly: [jumpfs parameter reference](doc/jumpfs-exe.md)
 
 
 ## *"What's wrong with ZLocation?"* and other questions

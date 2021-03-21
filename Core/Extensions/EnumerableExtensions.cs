@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace jumpfs.Extensions
+namespace Core.Extensions
 {
     public static class EnumerableExtensions
     {

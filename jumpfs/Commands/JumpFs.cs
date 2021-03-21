@@ -1,7 +1,7 @@
 ﻿using System;
-using jumpfs.Bookmarking;
+using Core.Bookmarking;
+using Core.EnvironmentAccess;
 using jumpfs.CommandLineParsing;
-using Environment = jumpfs.EnvironmentAccess.Environment;
 
 namespace jumpfs.Commands
 {
@@ -25,7 +25,7 @@ namespace jumpfs.Commands
             var outputStream = Console.Out;
             var errorStream = Console.Error;
 
-            var repo = new BookmarkRepository(new Environment());
+            var repo = new BookmarkRepository(new JumpfsEnvironment());
             return new ApplicationContext(repo, outputStream, errorStream);
         }
 

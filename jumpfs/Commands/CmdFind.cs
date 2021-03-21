@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using jumpfs.Bookmarking;
+using Core.Bookmarking;
 using jumpfs.CommandLineParsing;
 
 namespace jumpfs.Commands
@@ -50,12 +50,12 @@ specifiers can be combined and separated .  For example:
             if (mark.Name.Length == 0)
             {
                 //if we couldn't find the bookmark there is a chance the user gave us an actual path to use
-                if (context.Repo.Environment.FileExists(name))
+                if (context.Repo.JumpfsEnvironment.FileExists(name))
                 {
                     path = name;
                     folder = Path.GetDirectoryName(path);
                 }
-                else if (context.Repo.Environment.DirectoryExists(name))
+                else if (context.Repo.JumpfsEnvironment.DirectoryExists(name))
                 {
                     path = folder = name;
                 }

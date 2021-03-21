@@ -1,7 +1,7 @@
+using Core;
+using Core.EnvironmentAccess;
 using FluentAssertions;
-using jumpfs;
 using jumpfs.Commands;
-using jumpfs.EnvironmentAccess;
 using NUnit.Framework;
 using Tests.SupportClasses;
 
@@ -16,7 +16,7 @@ namespace Tests
             //These tests only run on windows
             if (ShellGuesser.IsUnixy())
                 return;
-            var env = new MockEnvironment(ShellType.PowerShell, new MockFileSystem());
+            var env = new MockJumpfsEnvironment(ShellType.PowerShell, new MockFileSystem());
             env.SetCwd(@"C:\a\b");
             var p = new FullPathCalculator(env);
             p.ToAbsolute(@"d:\x").Should().Be(@"d:\x");
@@ -29,7 +29,7 @@ namespace Tests
             //These tests only run on *nix
             if (!ShellGuesser.IsUnixy())
                 return;
-            var env = new MockEnvironment(ShellType.Wsl, new MockFileSystem());
+            var env = new MockJumpfsEnvironment(ShellType.Wsl, new MockFileSystem());
             env.SetCwd(@"/mnt/d/a");
             var p = new FullPathCalculator(env);
             p.ToAbsolute(@"../x").Should().Be(@"/mnt/d/x");

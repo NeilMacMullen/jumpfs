@@ -1,10 +1,10 @@
 using System.IO;
+using Core;
+using Core.Bookmarking;
+using Core.EnvironmentAccess;
+using Core.Extensions;
 using FluentAssertions;
-using jumpfs;
-using jumpfs.Bookmarking;
 using jumpfs.Commands;
-using jumpfs.EnvironmentAccess;
-using jumpfs.Extensions;
 using NUnit.Framework;
 using Tests.SupportClasses;
 
@@ -19,11 +19,11 @@ namespace Tests
             _stdout = new StringWriter();
             _stderr = new StringWriter();
             _fs = new MockFileSystem();
-            var winMock = new MockEnvironment(ShellType.PowerShell, _fs);
+            var winMock = new MockJumpfsEnvironment(ShellType.PowerShell, _fs);
             winMock.SetCwd(@"C:\");
             var winRepo = new BookmarkRepository(winMock);
             _win = new ApplicationContext(winRepo, _stdout, _stderr);
-            var wslMock = new MockEnvironment(ShellType.Wsl, _fs);
+            var wslMock = new MockJumpfsEnvironment(ShellType.Wsl, _fs);
             wslMock.SetCwd("/usr");
             wslMock.SetEnvironmentVariable(
                 EnvVariables.WslEnvVar,

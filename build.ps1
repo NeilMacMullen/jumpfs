@@ -1,5 +1,5 @@
 mkdir publish -Force
-Remove-Item publish\* 
+Remove-Item publish\* -Recurse -Force
 dotnet publish -p:PublishProfile=linux
 dotnet publish -p:PublishProfile=windows
 

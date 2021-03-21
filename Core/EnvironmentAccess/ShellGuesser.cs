@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using jumpfs.Bookmarking;
+using Core.Bookmarking;
 
-namespace jumpfs.EnvironmentAccess
+namespace Core.EnvironmentAccess
 {
     public static class ShellGuesser
     {
-        public static ShellType GuessShell(IEnvironment env)
+        public static ShellType GuessShell(IJumpfsEnvironment env)
         {
             //if the user has not specified the shell, try to guess it from environmental information
             var forcedEnv = env.GetEnvironmentVariable(EnvVariables.ShellOveride);

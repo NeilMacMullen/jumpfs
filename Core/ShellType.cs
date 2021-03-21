@@ -1,4 +1,4 @@
-﻿namespace jumpfs
+﻿namespace Core
 {
     /// <summary>
     ///     These are the environments we currently know how to run under

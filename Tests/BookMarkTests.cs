@@ -1,6 +1,6 @@
+using Core;
+using Core.Bookmarking;
 using FluentAssertions;
-using jumpfs;
-using jumpfs.Bookmarking;
 using NUnit.Framework;
 using Tests.SupportClasses;
 
@@ -12,13 +12,13 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            _environment = new MockEnvironment(ShellType.PowerShell,
+            _jumpfsEnvironment = new MockJumpfsEnvironment(ShellType.PowerShell,
                 new MockFileSystem());
-            _repo = new BookmarkRepository(_environment);
+            _repo = new BookmarkRepository(_jumpfsEnvironment);
         }
 
         private BookmarkRepository _repo;
-        private MockEnvironment _environment;
+        private MockJumpfsEnvironment _jumpfsEnvironment;
 
         [Test]
         public void BookMarkCanBeWritten()
