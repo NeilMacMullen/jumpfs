@@ -19,7 +19,10 @@ namespace jumpfs.Commands
                     .AllowEmpty()
                     .WithHelpText("column number"),
                 ArgumentDescriptor.CreateSwitch(Names.Literal)
-                    .WithHelpText("use the path as provided rather than trying to turn it into an absolute path")
+                    .WithHelpText("use the path as provided rather than trying to turn it into an absolute path"),
+                ArgumentDescriptor.Create<string>(Names.Type)
+                    .AllowEmpty()
+                    .WithHelpText("type (default is file/folder autodetect)")
             )
             .WithHelpText("adds a bookmark.  By default this is considered to be a folder");
 
@@ -29,10 +32,23 @@ namespace jumpfs.Commands
             var path = results.ValueOf<string>(Names.Path);
             var line = results.ValueOf<int>(Names.Line);
             var column = results.ValueOf<int>(Names.Column);
+            var bookmarkType = results.ValueOf<string>(Names.Type);
 
-            if (!results.ValueOf<bool>(Names.Literal))
-                path = context.ToAbsolutePath(path);
-            var type = context.Repo.JumpfsEnvironment.FileExists(path) ? BookmarkType.File : BookmarkType.Folder;
+            var type = BookmarkTypeParser.Parse(bookmarkType);
+
+            if (type == BookmarkType.Unknown)
+            {
+                //autodetect
+                if (path.StartsWith("http:") || path.StartsWith("https:"))
+                    type = BookmarkType.Url;
+                else
+                {
+                    if (!results.ValueOf<bool>(Names.Literal))
+                        path = context.ToAbsolutePath(path);
+                    type = context.Repo.JumpfsEnvironment.FileExists(path) ? BookmarkType.File : BookmarkType.Folder;
+                }
+            }
+
             context.Repo.Mark(type, name, path, line, column);
         }
     }

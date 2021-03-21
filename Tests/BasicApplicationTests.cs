@@ -32,7 +32,7 @@ namespace Tests
             }
 
             _repo = new BookmarkRepository(_env);
-            _context = new ApplicationContext(_repo, _stdout, _stderr);
+            _context = new ApplicationContext(_repo, _stdout, _stderr, Array.Empty<string>());
         }
 
         private ApplicationContext _context;
@@ -100,6 +100,48 @@ namespace Tests
             Execute("mark --name here --path apath --line 15 --column 10 --literal");
             Execute("find --name here --format %p:%l:%c");
             CheckOutput(@"apath:15:10");
+        }
+
+
+        [Test]
+        public void UrlNotReturnedUnlessTypeSpecified()
+        {
+            Execute("mark --name here --path http://atest");
+            Execute("find --name here");
+            GetStdOut().Trim().Should().BeEmpty();
+        }
+
+        [Test]
+        public void UrlReturnedWhenTypeSpecified()
+        {
+            Execute("mark --name here --path http://atest");
+            Execute("find --name here --type Url");
+            CheckOutput(@"http://atest");
+        }
+
+
+        [Test]
+        public void ScriptNotReturnedUnlessTypeSpecified()
+        {
+            Execute("mark --name here --path 'a_script' --type PsCmd");
+            Execute("find --name here");
+            GetStdOut().Trim().Should().BeEmpty();
+        }
+
+        [Test]
+        public void ScriptReturnedWhenTypeSpecified()
+        {
+            Execute("mark --name here --path a_script --type PsCmd");
+            Execute("find --name here --type PsCmd");
+            CheckOutput(@"a_script");
+        }
+
+        [Test]
+        public void ScriptNotReturnedInWrongShell()
+        {
+            Execute("mark --name here --path 'a_script' --type BashCmd");
+            Execute("find --name here --type BashCmd");
+            GetStdOut().Trim().Should().BeEmpty();
         }
     }
 }

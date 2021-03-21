@@ -16,6 +16,7 @@ If you like, or are using this project please give it a star - thanks!
 - better handling for missing bookmarks
 - If you pass an actual path instead of a bookmark, jumpfs now does the "right thing" in most cases.
 - Bookmarks can be exposed via [virtual drive](doc/psdrive.md) (Powershell 7 only)
+- It is now possible to bookmark Urls and shell commands
 
 ### v1.1.0
 First public release package
@@ -23,7 +24,9 @@ First public release package
 <hr/>
 
 
-**jumpfs** is a simple cross-platform exe and collection of scripts that allow you bookmark locations in your file system, jump between them, or open them in explorer or VS Code.  If you spent much time at the command line you owe it to your TAB key to use this!
+**jumpfs** is a simple cross-platform exe and collection of scripts that allow you bookmark locations in your file system, jump between them, or open them in explorer or VS Code.  You can also "bookmark" Urls and commands
+
+
 
 It's easiest to demonstrate with a picture..
 
@@ -53,6 +56,8 @@ Commands have both long function names and shorter aliases, shown in brackets be
  - `mark name path` creates a bookmark at the supplied folder or file
  - `mark name path 10 5` creates a bookmark with line number and column
 
+*path* can be a file, folder, or URL starting *http:* or *https:*
+
 jumpfs will silently overwrite an existing bookmark of the same name.  This is by design since bookmarks are meant to be lightweight and ephemeral.   If you don't like this behaviour, raise an issue and I'll consider adding a way to customise it. 
 
 ### jumpfs_go (go) - go to a bookmark
@@ -78,6 +83,18 @@ Gets the path of a bookmark so you can use it in a command.  For example:
 ```
 ls (bp myplace)
 ```
+
+### jumpfs_browse (url) - browse to a URL
+*currently not implemented for Bash*
+Runs explorer with the URL value of the bookmark 
+
+### jumpfs_remember_last_command (markcmd)  
+*currently not implemented for Bash*
+Stores the last issued command as a bookmark 
+
+### jumpfs_invoke (run)  
+*currently not implemented for Bash*
+Runs the bookmark (assuming it is a command that is suitable for the current shell)
 
 ### jumpfs_info - display version and other information
 **jumpfs_info** will provide version and environment information. 

@@ -14,6 +14,7 @@
         public const string Format = "format";
         public const string Literal = "literal";
         public const string Match = "match";
-        public static string Win = "winpath";
+        public const string Win = "winpath";
+        public const string Type = "type";
     }
 }

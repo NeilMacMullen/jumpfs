@@ -17,7 +17,9 @@ If you want to build one of the stable releases, checkout one of the release tag
 ## PowerShell
 Run the **build.ps** script in the top *jumps* folder.
 
-Note that if you already have the [virtual drive](psdrive.md) installed, the build will fail. You will need to close down all sessions that have the virtual drive loaded and then build from a shell that doesn't load it at startup.  In practice, the easiest way to do that is to start an older shell such as PowerShell 5.
+Note that if you already have the [virtual drive](psdrive.md) installed, the build will fail. You will need to close down all sessions that have the virtual drive loaded and then build from a shell that doesn't load it at startup. This may include VS-Code terminal sessions.
+
+In practice, the easiest way to do this is to build from an older shell such as PowerShell 5.
 
 ## Linux
 Run the **build.sh** script in the top *jumps* folder.

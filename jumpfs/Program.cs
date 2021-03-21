@@ -6,7 +6,7 @@ namespace jumpfs
     {
         private static void Main(string[] args)
         {
-            var context = JumpFs.CliContext();
+            var context = JumpFs.CliContext(args);
             JumpFs.ExecuteWithContext(args, context);
         }
     }

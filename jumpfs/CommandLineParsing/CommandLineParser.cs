@@ -24,7 +24,7 @@ namespace jumpfs.CommandLineParsing
         {
             return
                 @"Missing/unrecognised command.
-Use of of the following:
+Use one of the following:
 " + string.Join(Environment.NewLine, _commands.Select(c => $"  {c.Name} - {c.HelpText}"))
   + @"
 ";
@@ -42,41 +42,42 @@ Use of of the following:
 
             var assignedArguments = new Dictionary<string, object>();
 
-
-            for (var i = 1; i < suppliedArguments.Length; i++)
-            {
-                var token = suppliedArguments[i];
-                if (!token.StartsWith(CommandPrefix)) continue;
-                var p = token.Substring(CommandPrefix.Length);
-                if (!requestedCommand.TryArgument(p, out var arg))
+            //allow for "args" command
+            if (requestedCommand.Arguments.Any())
+                for (var i = 1; i < suppliedArguments.Length; i++)
                 {
-                    return ParseResults.Error(requestedCommand,
-                        ConstructHelpForCommand(requestedCommand,
-                            $"unrecognised argument '{p}'"
-                        ));
-                }
-
-                //move on to the next token
-                i++;
-
-                if (IsValue(i))
-                {
-                    if (!arg.TryConvert(suppliedArguments[i], out var v))
-                        return ParseResults.Error(requestedCommand, $"Parameter '{arg.Name}' invalid value");
-                    assignedArguments[arg.Name] = v;
-                }
-                else
-                {
-                    if (arg.CanBeEmpty)
+                    var token = suppliedArguments[i];
+                    if (!token.StartsWith(CommandPrefix)) continue;
+                    var p = token.Substring(CommandPrefix.Length);
+                    if (!requestedCommand.TryArgument(p, out var arg))
                     {
-                        assignedArguments[arg.Name] = arg.DefaultValueWhenFlagPresent();
-                        //rewind since we didn't actually consume
-                        i--;
+                        return ParseResults.Error(requestedCommand,
+                            ConstructHelpForCommand(requestedCommand,
+                                $"unrecognised argument '{p}'"
+                            ));
+                    }
+
+                    //move on to the next token
+                    i++;
+
+                    if (IsValue(i))
+                    {
+                        if (!arg.TryConvert(suppliedArguments[i], out var v))
+                            return ParseResults.Error(requestedCommand, $"Parameter '{arg.Name}' invalid value");
+                        assignedArguments[arg.Name] = v;
                     }
                     else
-                        return ParseResults.Error(requestedCommand, $"Parameter '{arg.Name}' missing value");
+                    {
+                        if (arg.CanBeEmpty)
+                        {
+                            assignedArguments[arg.Name] = arg.DefaultValueWhenFlagPresent();
+                            //rewind since we didn't actually consume
+                            i--;
+                        }
+                        else
+                            return ParseResults.Error(requestedCommand, $"Parameter '{arg.Name}' missing value");
+                    }
                 }
-            }
 
             var missingParameters = requestedCommand
                 .Arguments

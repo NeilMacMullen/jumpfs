@@ -16,6 +16,9 @@ if ($jumpfs_use_standard_alias) {
     Set-Alias -name x -value jumpfs_explorer_folder
     Set-Alias -name xr -value jumpfs_explorer_run
     Set-Alias -name bp -value jumpfs_value
+    Set-Alias -name url -value jumpfs_browse
+    Set-Alias -name markcmd -value jumpfs_remember_last_cmd
+    Set-Alias -name run -value jumpfs_invoke
 }
 
 ## EXPERIMENTAL - expose bookmarks as a virtual drive
@@ -59,11 +62,32 @@ function jumpfs_mark($p, $r, $l, $c) {
     jumpfs.exe mark --name $p --path $r --line $l --column $c
 }
 
+
+function jumpfs_remember_last_cmd($p) {
+    $cmd = (Get-History | Select-Object -Last 1).CommandLine
+    #ensure that quotes are translated so we pass the entire CommandLine
+    #as a single token
+    $cmd = $cmd.Replace("""","'")
+    jumpfs.exe mark --name $p --path $cmd --type Pscmd
+}
+
 #go to a bookmark 
 function jumpfs_go($p) {
     $path = (jumpfs.exe find --name $p) ;
-    jumpfs_do_or_warn_if_empty $path "set-location $path"  "No bookmark '$p'"
+    jumpfs_do_or_warn_if_empty $path "set-location '$path'"  "No bookmark '$p'"
 }
+
+
+function jumpfs_browse($p) {
+    $path = (jumpfs.exe find --name $p --type Url) ;
+    jumpfs_do_or_warn_if_empty $path "explorer.exe '$path'"  "No URL bookmark '$p'"
+}
+
+function jumpfs_invoke($p) {
+    $path = (jumpfs.exe find --name $p --type Pscmd) ;
+    jumpfs_do_or_warn_if_empty $path $path  "No script bookmark '$p'"
+}
+
 
 # list bookmarks
 function jumpfs_list($p) { jumpfs.exe list --match $p }
@@ -71,20 +95,20 @@ function jumpfs_list($p) { jumpfs.exe list --match $p }
 #open VS Code at a bookmark
 function jumpfs_code($p) { 
     $path = (jumpfs.exe find --name $p --format "%p:%l:%c") ;
-    jumpfs_do_or_warn_if_empty $path "code --goto $path"  "No bookmark '$p'"
- 
+    jumpfs_do_or_warn_if_empty $path "code --goto '$path'"  "No bookmark '$p'"
+
 }
 
 # open file-explorer at bookmark
 function jumpfs_explorer_folder($p) { 
     $path = (jumpfs.exe find --name $p) 
-    jumpfs_do_or_warn_if_empty $path "explorer $path" "No bookmark '$p'"
+    jumpfs_do_or_warn_if_empty $path "explorer '$path'" "No bookmark '$p'"
 }
 
 # runs the value of a bookmark
 function jumpfs_explorer_run($p) { 
     $path = (jumpfs.exe find --name $p --format "%p") ;
-    jumpfs_do_or_warn_if_empty $path "explorer $path" "No bookmark '$p'"
+    jumpfs_do_or_warn_if_empty $path "explorer '$path'" "No bookmark '$p'"
 }
 
 # get the path of a bookmark - useful for building command lines

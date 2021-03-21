@@ -5,9 +5,11 @@
         Unknown,
         File,
         Folder,
-
-        //Not yet supported
         Url,
-        Script
+
+        //command types
+        PsCmd,
+        BashCmd,
+        DosCmd
     }
 }
