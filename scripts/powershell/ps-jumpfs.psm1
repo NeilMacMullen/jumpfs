@@ -123,6 +123,10 @@ function jumpfs_remove($p) {
     jumpfs_do_or_warn_if_empty $path "" "No bookmark '$p'"
 }
 
-### ensure ffunctions and aliases are visible
+## run version check every 3 days
+if (((date).DayOfYear % 3) -eq 0) {
+    jumpfs.exe checkVersion --quiet
+}
+### ensure functions and aliases are visible
 Export-ModuleMember -alias * -function *
 

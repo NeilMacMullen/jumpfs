@@ -35,7 +35,7 @@ Use one of the following:
             if (!suppliedArguments.Any())
                 return ParseResults.Error(CommandDescriptor.Empty, ConstructHelp());
 
-            if (!_commands.TryGetSingle(c => c.Name == suppliedArguments[0], out var requestedCommand))
+            if (!_commands.TryGetSingle(c => c.Name.EqualsCI(suppliedArguments[0]), out var requestedCommand))
                 return ParseResults.Error(CommandDescriptor.Empty, ConstructHelp());
 
             bool IsValue(int i) => i < suppliedArguments.Length && !suppliedArguments[i].StartsWith(CommandPrefix);

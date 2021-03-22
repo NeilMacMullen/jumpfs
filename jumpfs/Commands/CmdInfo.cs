@@ -33,18 +33,7 @@ Useful links:
 
 
             context.WriteLine("Checking for new version...");
-            var t = UpgradeManager.GetLatestVersion();
-            t.Wait();
-            var latestVersion = t.Result;
-            context.WriteLine(
-                latestVersion.Supersedes(GitVersionInformation.SemVer)
-                    ? @$"
-  An Upgrade to version {latestVersion.Version} is available.
-  Please visit {UpgradeManager.ReleaseSite} for download.
-"
-                    : @"
-  You are running the latest version."
-            );
+            UpgradeManager.CheckAndWarnOfNewVersion(context.OutputStream, false);
         }
     }
 }

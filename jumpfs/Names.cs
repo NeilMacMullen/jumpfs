@@ -16,5 +16,6 @@
         public const string Match = "match";
         public const string Win = "winpath";
         public const string Type = "type";
+        public const string Quiet = "quiet";
     }
 }
