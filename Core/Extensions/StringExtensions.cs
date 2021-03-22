@@ -12,5 +12,8 @@ namespace Core.Extensions
 
         public static string WinSlash(this string str) => str.Replace("/", @"\");
         public static string UnixSlash(this string str) => str.Replace(@"\", "/");
+
+        public static bool EqualsCI(this string str, string other)
+            => str.Equals(other, StringComparison.InvariantCultureIgnoreCase);
     }
 }

@@ -25,7 +25,7 @@ namespace jumpfs.CommandLineParsing
         /// </summary>
         public readonly ArgumentDescriptor[] Arguments;
 
-        public CommandDescriptor(Action<ParseResults, ApplicationContext> action, string name,
+        private CommandDescriptor(Action<ParseResults, ApplicationContext> action, string name,
             ArgumentDescriptor[] arguments,
             string helpText)
         {
@@ -53,7 +53,7 @@ namespace jumpfs.CommandLineParsing
 
         public bool TryArgument(string name, out ArgumentDescriptor arg)
         {
-            return Arguments.TryGetSingle(a => a.Name == name, out arg);
+            return Arguments.TryGetSingle(a => a.Name.EqualsCI(name), out arg);
         }
     }
 }

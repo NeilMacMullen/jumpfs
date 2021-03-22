@@ -3,7 +3,7 @@ Remove-Item publish\* -Recurse -Force
 dotnet publish -p:PublishProfile=linux
 dotnet publish -p:PublishProfile=windows
 
-Remove-Item publish\*.pdb
+Remove-Item publish\*.pdb -Recurse
 
 Copy-Item scripts\bash\*.sh publish
 Copy-Item scripts\powershell\*.ps* publish

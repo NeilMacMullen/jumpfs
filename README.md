@@ -10,23 +10,18 @@ If you like, or are using this project please give it a star - thanks!
 
 ## What's new?
 
-### vNext (source only)
-- Implemented 'remove'
+### v1.2.0
+- Implemented 'remove' functionality
 - powershell and bash modules now better organised
 - better handling for missing bookmarks
 - If you pass an actual path instead of a bookmark, jumpfs now does the "right thing" in most cases.
 - Bookmarks can be exposed via [virtual drive](doc/psdrive.md) (Powershell 7 only)
 - It is now possible to bookmark Urls and shell commands
 
-### v1.1.0
-First public release package
-
+See [full revision history](doc/revisionHistory.md)
 <hr/>
 
-
-**jumpfs** is a simple cross-platform exe and collection of scripts that allow you bookmark locations in your file system, jump between them, or open them in explorer or VS Code.  You can also "bookmark" Urls and commands
-
-
+**jumpfs** is a simple cross-platform exe and collection of scripts that allow you bookmark locations in your file system, jump between them, or open them in explorer or VS Code.  You can also "bookmark" Urls and shell commands.
 
 It's easiest to demonstrate with a picture..
 

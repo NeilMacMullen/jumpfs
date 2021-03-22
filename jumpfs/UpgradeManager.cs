@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using jumpfs.Commands;
 
 namespace jumpfs
 {
@@ -28,6 +30,23 @@ namespace jumpfs
             {
                 return VersionInfo.Default;
             }
+        }
+
+        public static void CheckAndWarnOfNewVersion(TextWriter writer, bool suppressUpToDate)
+        {
+            var t = GetLatestVersion();
+            t.Wait();
+            var latestVersion = t.Result;
+            if (latestVersion.Supersedes(GitVersionInformation.SemVer))
+                writer.WriteLine(@$"
+  An Upgrade to jumpfs version {latestVersion.Version} is available.
+  Please visit {ReleaseSite} for download.
+");
+            else if (!suppressUpToDate)
+
+                writer.WriteLine(@"
+  You are running the latest version."
+                );
         }
 
         public static (int major, int minor, int patch) DecomposeVersion(string v)
