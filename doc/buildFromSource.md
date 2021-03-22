@@ -12,7 +12,7 @@ If you want to build the *bleeding-edge* checkout *main*
 
 If you want to build one of the stable releases, checkout one of the release tags
 
-`git checkout tags/v1.1.0`
+`git checkout tags/v1.2.0`
 
 ## PowerShell
 Run the **build.ps** script in the top *jumps* folder.
