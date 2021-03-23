@@ -21,6 +21,8 @@ C:\Users\neilm\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
 PS> unblock-file C:\tools\jumpfs\ps-jumpfs.psm1
 ```
 
+You *may* also have to unblock the *jumpfs/driverProviders/DriveProvider.dll* file although that hasn't been necessary in my testing.
+
 You'll then need to add these lines to the end of the script.  Modify the `jumpfs_path` line to point to the folder you stored the files.
 
 ```
