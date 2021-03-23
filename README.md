@@ -10,6 +10,9 @@ If you like, or are using this project please give it a star - thanks!
 
 ## What's new?
 
+### vNext (source only)
+- fixes an issue where `get-content jfs:x` would never terminate
+
 ### v1.2.0
 - Implemented 'remove' functionality
 - powershell and bash modules now better organised
