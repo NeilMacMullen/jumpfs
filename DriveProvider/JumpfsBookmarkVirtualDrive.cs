@@ -13,60 +13,66 @@ namespace DriveProvider
     [CmdletProvider("jumpfs", ProviderCapabilities.ExpandWildcards)]
     public class JumpfsBookmarkVirtualDrive : NavigationCmdletProvider, IContentCmdletProvider
     {
-        private BookmarkRepository _repo => new BookmarkRepository(new JumpfsEnvironment());
+        //TODO - possibly this could be cached - it's a little unclear what the lifecycle of this class is
+        //By NOT caching we can,at least, avoid problems with cross-over reads and writes from different sessions
+        private BookmarkRepository Repo => new BookmarkRepository(new JumpfsEnvironment());
 
 
         protected override string[] ExpandPath(string path)
         {
-            Debug(path);
-            path ??= "";
-            path = TranslatePath(path);
-            var bmk = _repo.Load();
-            return BookmarkRepository.Match(bmk, path)
-                .Select(b => b.Name).ToArray();
+            return DebugR(path, () =>
+            {
+                path ??= "";
+                path = TranslatePath(path);
+                var bmk = Repo.Load();
+                return BookmarkRepository.Match(bmk, path)
+                    .Select(b => b.Name).ToArray();
+            });
         }
 
         protected override bool HasChildItems(string path)
         {
-            Debug(path);
-            //bookmarks don't have children
-            return false;
+            return DebugR(path,
+                () => false);
         }
 
         protected override void RemoveItem(string path, bool recurse)
         {
-            Debug(path);
-            _repo.Remove(TranslatePath(path));
+            DebugR(path, () => Repo.Remove(TranslatePath(path)));
         }
 
 
         protected override void GetChildNames(string path, ReturnContainers returnContainers)
         {
-            Debug(path);
-            var bookmarks = _repo.Load()
-                .OrderBy(b => b.Name)
-                .Select(b => b.Name)
-                .ToArray();
-            foreach (var b in bookmarks)
-                WriteItemObject(b, path, false);
+            DebugR(path, () =>
+            {
+                var bookmarks = Repo.Load()
+                    .OrderBy(b => b.Name)
+                    .Select(b => b.Name)
+                    .ToArray();
+                foreach (var b in bookmarks)
+                    WriteItemObject(b, path, false);
+            });
         }
 
         protected override void GetChildItems(string path, bool recurse)
         {
-            Debug($"{path} {recurse}");
-            var bookmarks = _repo.Load()
-                .OrderBy(b => b.Name);
-            foreach (var b in bookmarks)
-            {
-                WriteItemObject(b, path, false);
-            }
+            DebugR($"{path} {recurse}",
+                () =>
+                {
+                    var bookmarks = Repo.Load()
+                        .OrderBy(b => b.Name);
+                    foreach (var b in bookmarks)
+                    {
+                        WriteItemObject(b, path, false);
+                    }
+                });
         }
 
         //we are an item container if at the root
         protected override bool IsItemContainer(string path)
         {
-            Debug($"{path}");
-            return TranslatePath(path) == "";
+            return DebugR($"{path}", () => TranslatePath(path) == "");
         }
 
 
@@ -77,82 +83,83 @@ namespace DriveProvider
 
         protected override bool ItemExists(string path)
         {
-            Debug(path);
-            if (path == null)
-                return true;
-            path = TranslatePath(path);
-            var bookmarks = _repo.Load();
-            return string.IsNullOrEmpty(path) || bookmarks.Any(b => b.Name == path);
+            return DebugR(path,
+                () =>
+                {
+                    if (path == null)
+                        return true;
+
+                    path = TranslatePath(path);
+                    var bookmarks = Repo.Load();
+                    return string.IsNullOrEmpty(path) || bookmarks.Any(b => b.Name == path);
+                });
         }
 
 
         //for testing, just return a string
         protected override void GetItem(string path)
         {
-            Debug(path);
-            var bookmarks = _repo.Load();
-            foreach (var bookmark in bookmarks.Where(b => b.Name == TranslatePath(path)))
-            {
-                WriteItemObject(bookmark, path, false);
-            }
+            DebugR(path,
+                () =>
+                {
+                    var bookmarks = Repo.Load();
+                    foreach (var bookmark in bookmarks.Where(b => b.Name == TranslatePath(path)))
+                    {
+                        WriteItemObject(bookmark, path, false);
+                    }
+                });
         }
 
         protected override PSDriveInfo NewDrive(PSDriveInfo drive)
         {
-            Debug("");
-            return base.NewDrive(drive);
+            return DebugR("", () => base.NewDrive(drive));
         }
 
-        private void Debug(string message, [CallerMemberName] string caller = "none")
-        {
-            WriteDebug($"{caller}:  {message}");
-        }
 
         #region CONTENT
 
         public IContentReader GetContentReader(string path)
         {
-            Debug(path);
-            var bookmarks = _repo.Load();
-            path = TranslatePath(path);
-            if (bookmarks.TryGetSingle(b => b.Name == path, out var hit))
-            {
-                return new BookmarkContentReader(hit.Path);
-            }
+            return DebugR(path,
+                () =>
+                {
+                    var bookmarks = Repo.Load();
+                    path = TranslatePath(path);
+                    if (bookmarks.TryGetSingle(b => b.Name == path, out var hit))
+                    {
+                        return new BookmarkContentReader(hit.Path);
+                    }
 
-            throw new ArgumentException($"{path} is not a valid bookmark name");
+                    throw new ArgumentException($"{path} is not a valid bookmark name");
+                });
         }
+
 
         public object GetContentReaderDynamicParameters(string path)
         {
-            Debug(path);
-            return null;
+            return DebugR<object>(path, () => null);
         }
 
         #region CONTENT notimplemented
 
         public void ClearContent(string path)
         {
-            Debug(path);
-            throw new NotImplementedException();
+            DebugR(path, () => throw new NotImplementedException());
         }
 
         public object ClearContentDynamicParameters(string path)
         {
-            Debug(path);
-            throw new NotImplementedException();
+            return DebugR<object>(path, () => throw new NotImplementedException());
         }
 
         public IContentWriter GetContentWriter(string path)
         {
-            Debug(path);
-            throw new NotImplementedException();
+            return DebugR<IContentWriter>(path, () => throw new NotImplementedException());
         }
 
         public object GetContentWriterDynamicParameters(string path)
         {
-            Debug(path);
-            throw new NotImplementedException();
+            return DebugR<object>(path, () => throw new NotImplementedException());
         }
 
         #endregion CONTENT notimplemented
@@ -163,206 +170,217 @@ namespace DriveProvider
 
         protected override object GetChildItemsDynamicParameters(string path, bool recurse)
         {
-            Debug("");
-            return base.GetChildItemsDynamicParameters(path, recurse);
+            return DebugR($"p:{path} r:{recurse}", () => base.GetChildItemsDynamicParameters(path, recurse));
         }
 
         protected override void ClearItem(string path)
         {
-            Debug("");
-            base.ClearItem(path);
+            DebugR("", () =>
+                base.ClearItem(path));
         }
 
         protected override object ClearItemDynamicParameters(string path)
         {
-            Debug("");
-            return base.ClearItemDynamicParameters(path);
+            return DebugR("", () => base.ClearItemDynamicParameters(path));
         }
 
         protected override bool ConvertPath(string path, string filter, ref string updatedPath,
             ref string updatedFilter)
         {
             Debug("");
-            return base.ConvertPath(path, filter, ref updatedPath, ref updatedFilter);
+            _debugLevel++;
+            var r = base.ConvertPath(path, filter, ref updatedPath, ref updatedFilter);
+            _debugLevel--;
+            Debug($"ret:{r}");
+            return r;
         }
 
 
         protected override void CopyItem(string path, string copyPath, bool recurse)
         {
-            Debug("");
-            base.CopyItem(path, copyPath, recurse);
+            DebugR("", () => base.CopyItem(path, copyPath, recurse));
         }
 
         protected override object CopyItemDynamicParameters(string path, string destination, bool recurse)
         {
-            Debug("");
-            return base.CopyItemDynamicParameters(path, destination, recurse);
+            return DebugR("", () => base.CopyItemDynamicParameters(path, destination, recurse));
         }
 
         protected override void GetChildItems(string path, bool recurse, uint depth)
         {
-            Debug("");
-            base.GetChildItems(path, recurse, depth);
+            DebugR("",
+                () => base.GetChildItems(path, recurse, depth));
         }
 
         protected override string GetChildName(string path)
         {
-            Debug("");
-            return base.GetChildName(path);
+            return DebugR(path, () => base.GetChildName(path));
         }
 
         protected override object GetChildNamesDynamicParameters(string path)
         {
-            Debug("");
-            return base.GetChildNamesDynamicParameters(path);
+            return DebugR(path, () => base.GetChildNamesDynamicParameters(path));
         }
 
         protected override object GetItemDynamicParameters(string path)
         {
-            Debug("");
-            return base.GetItemDynamicParameters(path);
+            return DebugR(path, () => base.GetItemDynamicParameters(path));
         }
 
         protected override string GetParentPath(string path, string root)
         {
-            Debug("");
-            return base.GetParentPath(path, root);
+            return DebugR($"p:{path} r:{root}", () => base.GetParentPath(path, root));
         }
 
         public override string GetResourceString(string baseName, string resourceId)
         {
-            Debug("");
-            return base.GetResourceString(baseName, resourceId);
+            return DebugR("", () => base.GetResourceString(baseName, resourceId));
         }
 
         protected override Collection<PSDriveInfo> InitializeDefaultDrives()
         {
-            Debug("");
-            return base.InitializeDefaultDrives();
+            return DebugR("", () => base.InitializeDefaultDrives());
         }
 
         protected override void InvokeDefaultAction(string path)
         {
-            Debug("");
-            base.InvokeDefaultAction(path);
+            DebugR("", () => base.InvokeDefaultAction(path));
         }
 
         protected override object InvokeDefaultActionDynamicParameters(string path)
         {
-            Debug("");
-            return base.InvokeDefaultActionDynamicParameters(path);
+            return DebugR("", () => base.InvokeDefaultActionDynamicParameters(path));
         }
 
 
         protected override object ItemExistsDynamicParameters(string path)
         {
-            Debug("");
-            return base.ItemExistsDynamicParameters(path);
+            return DebugR("", () => base.ItemExistsDynamicParameters(path));
         }
 
 
         protected override string MakePath(string parent, string child)
         {
-            Debug($"parent:'{parent}' child:'{child}'");
-            return base.MakePath(parent, child);
+            return DebugR($"p:{parent} c:{child}", () => base.MakePath(parent, child));
         }
 
         protected override void MoveItem(string path, string destination)
         {
-            Debug("");
-            base.MoveItem(path, destination);
+            DebugR("", () => base.MoveItem(path, destination));
         }
 
         protected override object MoveItemDynamicParameters(string path, string destination)
         {
-            Debug("");
-            return base.MoveItemDynamicParameters(path, destination);
+            return DebugR("", () => base.MoveItemDynamicParameters(path, destination));
         }
 
         protected override object NewDriveDynamicParameters()
         {
-            Debug("");
-            return base.NewDriveDynamicParameters();
+            return DebugR("", () => base.NewDriveDynamicParameters());
         }
 
         protected override void NewItem(string path, string itemTypeName, object newItemValue)
         {
-            Debug("");
-            base.NewItem(path, itemTypeName, newItemValue);
+            DebugR("", () => base.NewItem(path, itemTypeName, newItemValue));
         }
 
         protected override object NewItemDynamicParameters(string path, string itemTypeName, object newItemValue)
         {
-            Debug("");
-            return base.NewItemDynamicParameters(path, itemTypeName, newItemValue);
+            return DebugR("", () => base.NewItemDynamicParameters(path, itemTypeName, newItemValue));
         }
 
         protected override string NormalizeRelativePath(string path, string basePath)
         {
-            Debug("");
-            return base.NormalizeRelativePath(path, basePath);
+            return DebugR("", () => base.NormalizeRelativePath(path, basePath));
         }
 
         protected override PSDriveInfo RemoveDrive(PSDriveInfo drive)
         {
-            Debug("");
-            return base.RemoveDrive(drive);
+            return DebugR("", () => base.RemoveDrive(drive));
         }
 
         protected override object RemoveItemDynamicParameters(string path, bool recurse)
         {
-            Debug("");
-            return base.RemoveItemDynamicParameters(path, recurse);
+            return DebugR("", () => base.RemoveItemDynamicParameters(path, recurse));
         }
 
         protected override void RenameItem(string path, string newName)
         {
-            Debug("");
-            base.RenameItem(path, newName);
+            DebugR("", () => base.RenameItem(path, newName));
         }
 
         protected override object RenameItemDynamicParameters(string path, string newName)
         {
-            Debug("");
-            return base.RenameItemDynamicParameters(path, newName);
+            return DebugR("", () => base.RenameItemDynamicParameters(path, newName));
         }
 
         protected override void SetItem(string path, object value)
         {
-            Debug("");
-            base.SetItem(path, value);
+            DebugR("", () => base.SetItem(path, value));
         }
 
         protected override object SetItemDynamicParameters(string path, object value)
         {
-            Debug("");
-            return base.SetItemDynamicParameters(path, value);
+            return DebugR("", () => base.SetItemDynamicParameters(path, value));
         }
 
         protected override ProviderInfo Start(ProviderInfo providerInfo)
         {
-            Debug("");
-            return base.Start(providerInfo);
+            return DebugR("", () => base.Start(providerInfo));
         }
 
         protected override object StartDynamicParameters()
         {
-            Debug("");
-            return base.StartDynamicParameters();
+            return DebugR("", () => base.StartDynamicParameters());
         }
 
         protected override void Stop()
         {
-            Debug("");
-            base.Stop();
+            DebugR("", () => base.Stop());
         }
 
         protected override void StopProcessing()
         {
-            Debug("");
-            base.StopProcessing();
+            DebugR("", () => base.StopProcessing());
         }
 
         #endregion
+
+        #region debug
+
+        private int _debugLevel;
+
+        private void DebugIndented(string msg)
+        {
+            var pad = "".PadRight(_debugLevel * 4);
+            WriteDebug($"{pad}{msg}");
+        }
+
+
+        private void Debug(string message, [CallerMemberName] string caller = "none")
+        {
+            DebugIndented($"{caller}:  {message}");
+        }
+
+        private T DebugR<T>(string message, Func<T> act, [CallerMemberName] string caller = "none")
+        {
+            DebugIndented($"{caller}:  {message}");
+            _debugLevel++;
+            var r = act();
+            _debugLevel--;
+            DebugIndented($"{caller}:  returned {r}");
+            return r;
+        }
+
+        private void DebugR(string message, Action act, [CallerMemberName] string caller = "none")
+        {
+            DebugIndented($"{caller}:  {message}");
+            _debugLevel++;
+            act();
+            _debugLevel--;
+            DebugIndented($"{caller}:  returned (void)");
+        }
+
+        #endregion debug
     }
 }
