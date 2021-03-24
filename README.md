@@ -1,6 +1,9 @@
 
-![GitHub release (latest by SemVer including pre-releases)](https://img.shields.io/github/downloads-pre/NeilMacmullen/jumpfs/total)
-[![Coverage Status](https://coveralls.io/repos/github/NeilMacMullen/jumpfs/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/NeilMacMullen/jumpfs?branch=main) [![Join the chat at https://gitter.im/jumpfs/community](https://badges.gitter.im/jumpfs/community.svg)](https://gitter.im/jumpfs/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+[![NuGet](https://img.shields.io/nuget/v/jumpfs?label=Latest-version)](https://www.nuget.org/packages/jumpfs/)
+[![GitHub release (latest by SemVer including pre-releases)](https://img.shields.io/github/downloads-pre/NeilMacmullen/jumpfs/total?label=Local-downloads)](https://github.com/NeilMacMullen/jumpfs/releases) 
+[![NuGet](https://img.shields.io/nuget/dt/jumpfs?label=Nuget-downloads)](https://www.nuget.org/packages/jumpfs/) 
+[![Join the chat at https://gitter.im/jumpfs/community](https://badges.gitter.im/jumpfs/community.svg)](https://gitter.im/jumpfs/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Give a Star! :star:
 
