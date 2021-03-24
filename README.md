@@ -35,6 +35,7 @@ It's easiest to demonstrate with a picture..
 ## I want it! 
 
 Great! You can get [prebuilt binaries](doc/download.md) or [build it yourself from source](doc/buildFromSource.md). 
+There is also a [nuget package](https://www.nuget.org/packages/jumpfs/)
 
 
 Follow the instructions to
