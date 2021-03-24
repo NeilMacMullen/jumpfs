@@ -10,9 +10,11 @@ If you like, or are using this project please give it a star - thanks!
 
 ## What's new?
 
-### vNext (source only)
+### v1.3.0
 - fixes an issue where `get-content jfs:x` would never terminate
-
+- fixed nuspec file
+- changed 'run' alias to 'jrun' to make alias collisions less likely
+  
 ### v1.2.0
 - Implemented 'remove' functionality
 - powershell and bash modules now better organised
@@ -90,7 +92,7 @@ Runs explorer with the URL value of the bookmark
 *currently not implemented for Bash*
 Stores the last issued command as a bookmark 
 
-### jumpfs_invoke (run)  
+### jumpfs_invoke (jrun)  
 *currently not implemented for Bash*
 Runs the bookmark (assuming it is a command that is suitable for the current shell)
 

@@ -1,5 +1,9 @@
 # Change log
 
+### v1.3.0
+- fixes an issue where `get-content jfs:x` would never terminate
+- fixed nuspec file
+
 # v1.2.0
 - Implemented 'remove'
 - powershell and bash modules now better organised

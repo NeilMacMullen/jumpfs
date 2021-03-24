@@ -18,7 +18,7 @@ if ($jumpfs_use_standard_alias) {
     Set-Alias -name bp -value jumpfs_value
     Set-Alias -name url -value jumpfs_browse
     Set-Alias -name markcmd -value jumpfs_remember_last_cmd
-    Set-Alias -name run -value jumpfs_invoke
+    Set-Alias -name jrun -value jumpfs_invoke
 }
 
 ## EXPERIMENTAL - expose bookmarks as a virtual drive
@@ -124,7 +124,7 @@ function jumpfs_remove($p) {
 }
 
 ## run version check every 3 days
-if (((date).DayOfYear % 3) -eq 0) {
+if (((Get-date).DayOfYear % 3) -eq 0) {
     jumpfs.exe checkVersion --quiet
 }
 ### ensure functions and aliases are visible

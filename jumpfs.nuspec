@@ -1,0 +1,19 @@
+<package>
+    <metadata>
+      <id>jumpfs</id>
+      <version>1.2.0.0</version>
+      <title>jumpfs - cross-shell bookmarking </title>
+      <authors>NeilMacMullen</authors>
+      <owners>NeilMacMullen</owners>
+      <license type="expression">MIT</license>
+         <projectUrl>https://github.com/NeilMacMullen/jumpfs</projectUrl>
+      <requireLicenseAcceptance>false</requireLicenseAcceptance>
+      <description>Jump around your filesystem with bookmarks that can be shared between WSL, Powershell and DOS.  Bookmark URLs, shell commands and more...</description>
+      <releaseNotes>First nuget release</releaseNotes>
+      <copyright>Copyright 2021</copyright>
+      <tags>wsl powershell bookmark navigation wsl powershell</tags>
+    </metadata>
+    <files>
+      <file src="publish\**" target="jumpfs" />
+    </files>
+  </package>
