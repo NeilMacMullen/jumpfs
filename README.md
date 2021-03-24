@@ -29,9 +29,11 @@ If you like, or are using this project please give it a star - thanks!
 See [full revision history](doc/revisionHistory.md)
 <hr/>
 
-**jumpfs** is a simple cross-platform exe and collection of scripts that allow you bookmark locations in your file system, jump between them, or open them in explorer or VS Code.  You can also "bookmark" Urls and shell commands.
+**jumpfs** is a simple cross-platform exe and collection of scripts that allow you bookmark locations in your file system, jump between them, or open them in explorer or VS Code. 
 
 Jumps knows how to translate between WSL paths and Windows paths so you can use Bash bookmarks from PowerShell or PowerShell bookmarks from Bash.  
+
+You can also "bookmark" Urls and shell commands which can make it a bit easier to reuse that complicated pipeline you just spent half an hour putting together.
 
 It's easiest to demonstrate with a picture..
 
