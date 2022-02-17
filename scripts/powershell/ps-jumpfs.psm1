@@ -123,10 +123,11 @@ function jumpfs_remove($p) {
     jumpfs_do_or_warn_if_empty $path "" "No bookmark '$p'"
 }
 
-## run version check every 3 days
-if (((Get-date).DayOfYear % 3) -eq 0) {
+## run version check approximately 1 in 10 startups to prevent it being too intrusive
+if (($(Get-date).Second % 10) -eq 0) {
     jumpfs.exe checkVersion --quiet
 }
+
 ### ensure functions and aliases are visible
 Export-ModuleMember -alias * -function *
 
