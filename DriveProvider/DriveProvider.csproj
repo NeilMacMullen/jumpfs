@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Management.Automation" Version="7.2.2" />
+    <PackageReference Include="System.Management.Automation" Version="7.2.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
