@@ -2,6 +2,6 @@
 {
     public static class GitVersionInformation
     {
-        public const string SemVer = "1.3.0";
+        public const string SemVer = "1.4.0";
     }
 }
