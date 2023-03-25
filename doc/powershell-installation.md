@@ -1,6 +1,6 @@
 # Installing for PowerShell
 
-Ensure you have [.NET 5.0 for Windows](https://dotnet.microsoft.com/download/dotnet/5.0) installed.  You only need the *.NET Runtime* unless you are planning to [build from source](buildFromSource.md).
+Ensure you have [.NET 7.0 for Windows](https://dotnet.microsoft.com/download/dotnet/7.0) installed.  You only need the *.NET Runtime* unless you are planning to [build from source](buildFromSource.md).
 
 Next, [download](download.md) or [build](buildFromSource.md) *jumpfs* and copy the files to a folder such as `C:\tools\jumpfs`.    
 

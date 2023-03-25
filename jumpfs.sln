@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30223.230
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33513.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jumpfs", "jumpfs\jumpfs.csproj", "{E9E6F99B-8455-40F9-BD52-61987D8D8A36}"
 EndProject
@@ -41,16 +41,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{C3EA9AA4-775
 		doc\cmd-installation.md = doc\cmd-installation.md
 		doc\contributions.md = doc\contributions.md
 		doc\download.md = doc\download.md
+		doc\faq.md = doc\faq.md
 		doc\jumpfs-exe.md = doc\jumpfs-exe.md
 		doc\linux-installation.md = doc\linux-installation.md
 		doc\powershell-installation.md = doc\powershell-installation.md
+		doc\psdrive.md = doc\psdrive.md
+		doc\revisionHistory.md = doc\revisionHistory.md
 		doc\troubleshooting.md = doc\troubleshooting.md
 		doc\wsl-installation.md = doc\wsl-installation.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveProvider", "DriveProvider\DriveProvider.csproj", "{0363DE4C-0569-4C5C-8A9F-0B3EF821D7E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DriveProvider", "DriveProvider\DriveProvider.csproj", "{0363DE4C-0569-4C5C-8A9F-0B3EF821D7E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{3E33E98C-240B-403A-A1D6-FA809B4DEB4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{3E33E98C-240B-403A-A1D6-FA809B4DEB4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

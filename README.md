@@ -12,22 +12,9 @@ If you like, or are using this project please give it a star - thanks!
 
 
 ## What's new?
-### vNext (source only)
-- migrate to Net6
+### v1.4.0 (Mar 2023)
+- migrate to Net7
 - slightly less intrusive version checking
-
-### v1.3.0
-- fixes an issue where `get-content jfs:x` would never terminate
-- fixed nuspec file
-- changed 'run' alias to 'jrun' to make alias collisions less likely
-  
-### v1.2.0
-- Implemented 'remove' functionality
-- powershell and bash modules now better organised
-- better handling for missing bookmarks
-- If you pass an actual path instead of a bookmark, jumpfs now does the "right thing" in most cases.
-- Bookmarks can be exposed via [virtual drive](doc/psdrive.md) (Powershell 7 only)
-- It is now possible to bookmark Urls and shell commands
 
 See [full revision history](doc/revisionHistory.md)
 <hr/>
