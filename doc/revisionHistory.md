@@ -1,5 +1,9 @@
 # Change log
 
+### v1.4.0
+- Migrate to Net7
+- Make version checking less intrusive by only checking on 1 in 10 startups
+
 ### v1.3.0
 - fixes an issue where `get-content jfs:x` would never terminate
 - fixed nuspec file

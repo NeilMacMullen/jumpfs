@@ -12,8 +12,8 @@ If you like, or are using this project please give it a star - thanks!
 
 
 ## What's new?
-### vNext (source only)
-- migrate to Net6
+### v1.4.0
+- migrate to Net7
 - slightly less intrusive version checking
 
 ### v1.3.0
