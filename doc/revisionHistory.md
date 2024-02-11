@@ -1,5 +1,8 @@
 # Change log
 
+### v1.5.0
+- Migrate to Net8
+
 ### v1.4.0
 - Migrate to Net7
 - Make version checking less intrusive by only checking on 1 in 10 startups
