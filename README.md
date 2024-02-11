@@ -10,11 +10,9 @@
 If you like, or are using this project please give it a star - thanks!
 <hr/>
 
-
 ## What's new?
-### v1.4.0 (Mar 2023)
-- migrate to Net7
-- slightly less intrusive version checking
+### v1.5.0 (Feb 2024)
+- migrate to Net8
 
 See [full revision history](doc/revisionHistory.md)
 <hr/>
